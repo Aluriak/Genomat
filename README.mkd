@@ -1,0 +1,15 @@
+# Genomat
+Python3 and numpy project about matrix, genes network and (not exactly) genetic algoritm.  
+
+Use makefile for quick launch of modules.
+
+
+## functionnal way
+Implemented in *genomat\_func* module.
+
+
+## OO way
+Implemented in *genomat* module.
+
+
+
