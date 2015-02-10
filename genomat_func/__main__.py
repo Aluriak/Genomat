@@ -3,9 +3,8 @@
 #       __MAIN__        #
 #########################
 """
-Pure functionnal incomplete implementation of PRJ project.
-Gene KO and mutations are not implemented.
-Computation of viability for a genome is not really implemented, but works…
+Pure functionnal and incomplete implementation of PRJ project.
+Gene KOs are not implemented.
 
 Its just for playing and teaching.
 Real project is implemented as genomat module.
@@ -18,7 +17,7 @@ Real project is implemented as genomat module.
 #########################
 from functools import partial
 from itertools import product
-from numpy import matrix, array
+from numpy import matrix, array, array_equal#, choose as matrix_choose
 import random
 
 
@@ -28,8 +27,10 @@ import random
 #########################
 NB_PARENTS           = 2
 DEFAULT_GENE_NUMBER  = 5
+DEFAULT_POP_SIZE     = 20
 DEFAULT_GENE_VALUE   = partial(random.randint, 0, 9)
-DEFAULT_PHENOTYPE    = matrix([[1] for _ in range(DEFAULT_GENE_NUMBER)])
+DEFAULT_PHENOTYPE    = array([[random.choice((-1, 0, 1))] for _ in range(DEFAULT_GENE_NUMBER)])
+DEFAULT_MUTATION_RATE= 0.05
 def DEFAULT_THRESHOLDING(phenotype):
     """
     Threshold function for a phenotype
@@ -39,6 +40,24 @@ def DEFAULT_THRESHOLDING(phenotype):
     assert(phenotype.shape == (DEFAULT_GENE_NUMBER, 1))
     def sign(x): return (1 if x > 0 else (-1 if x < 0 else 0))
     return matrix([[sign(gene_expr)] for gene_expr in phenotype])
+
+def DEFAULT_VALUE_MUTATION(value):
+    return value + random.choice((1, -1))
+
+def DEFAULT_MUTATION(genome, rate, mutated_value=DEFAULT_VALUE_MUTATION):
+    """
+    Mutation function
+    return genome, modified.
+    """
+    mutated_genome = []
+    for gene in range(len(genome)):
+        mutated_gene = []
+        for value in array(genome[gene])[0]:
+            mutated_gene.append(mutated_value(value) 
+                                if random.randint(1, 100) < rate * 100.
+                                else value) 
+        mutated_genome.append(mutated_gene)
+    return matrix(mutated_genome)
 
 
 
@@ -64,7 +83,7 @@ def init_genome(size=DEFAULT_GENE_NUMBER, random_value=DEFAULT_GENE_VALUE):
         assert(genome[1, 0] == 1)
         assert(genome[1, 1] == 0)
     """
-    return matrix([[random_value() for _ in range(size)] for _ in range(size)])
+    return array([[random_value() for _ in range(size)] for _ in range(size)])
 
 
 def init_population(size, is_viable, new_indiv=init_genome):
@@ -85,8 +104,9 @@ def prettyfied_genome(genome, size=DEFAULT_GENE_NUMBER):
     """Return well vizualisation of genome as string"""
     return str(genome)
 
-def prettyfied_population(pop, genome_size=DEFAULT_GENE_NUMBER):
+def prettyfied_population(pop, phenotype=DEFAULT_PHENOTYPE, genome_size=DEFAULT_GENE_NUMBER):
     return ('\nPOPULATION:\n' 
+            + '\nPhenotype:\n' + prettyfied_genome(phenotype) + '\nIndividuals:\n'
             + '\n'.join([prettyfied_genome(ind, genome_size) for ind in pop]))
 
 
@@ -101,6 +121,7 @@ def genome_from(parents, size=DEFAULT_GENE_NUMBER):
     Each line of new genome is randomly choosed from 
     one parent.
     """
+    #return matrix_choose(parents)
     new_indiv = []
     for gene in range(size):
         # for each row choose a parent
@@ -109,24 +130,29 @@ def genome_from(parents, size=DEFAULT_GENE_NUMBER):
     return matrix(new_indiv)
 
 
-def next_population(pop, is_viable, size=None):
+def next_population(pop, is_viable, mutated, size=None):
     """Return new population, derived from given one"""
     size = len(pop) if size is None else size
     new_pop = []
     while len(new_pop) < size:
-        new_indiv = genome_from(random.sample(pop, NB_PARENTS))
+        new_indiv = mutated(genome_from(random.sample(pop, NB_PARENTS)))
         new_pop.append(new_indiv) if is_viable(new_indiv) else None
     return new_pop
 
 
-def genome_is_viable(genome, initial_phenotype, thresholding=DEFAULT_THRESHOLDING, size=DEFAULT_GENE_NUMBER):
+def genome_is_viable(genotype, initial_phenotype, thresholded=DEFAULT_THRESHOLDING):
     """
     Genome is viable if its stabilize itself.
     Stabilization of a genome is verified if thresholding of multiplication of initial_phenotype and genome is
-    equal to initial phenotype.
-    Not really implemented.
+    equal to stabilized phenotype.
     """
-    return random.randint(0, 1) == 0
+    def next_phenotype(): return thresholded(genotype.dot(current_phenotype)) 
+    walked_phenotypes = list() # matrix are not hashable :(
+    current_phenotype = initial_phenotype
+    while not any((array_equal(current_phenotype, p) for p in walked_phenotypes)):
+        walked_phenotypes.append(current_phenotype)
+        current_phenotype = next_phenotype()
+    return all(next_phenotype() == current_phenotype)
 
 
 
@@ -134,14 +160,16 @@ def genome_is_viable(genome, initial_phenotype, thresholding=DEFAULT_THRESHOLDIN
 # MAIN FUNCTION         #
 #########################
 if __name__ is '__main__':
+    phenotype = DEFAULT_PHENOTYPE
     genome_is_viable = partial(genome_is_viable, 
-                               initial_phenotype=DEFAULT_PHENOTYPE, 
-                               thresholding=DEFAULT_THRESHOLDING
+                               initial_phenotype=phenotype, 
+                               thresholded=DEFAULT_THRESHOLDING
                               )
-    p = init_population(10, genome_is_viable)
+    mutated = partial(DEFAULT_MUTATION, rate=DEFAULT_MUTATION_RATE)
+    p = init_population(DEFAULT_POP_SIZE, genome_is_viable)
     for _ in range(10):
-        p = next_population(p, genome_is_viable)
-        print(prettyfied_population(p))
+        p = next_population(p, is_viable=genome_is_viable, mutated=mutated)
+        print(prettyfied_population(p, phenotype))
 
 
 
