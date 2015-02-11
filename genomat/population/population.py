@@ -1,34 +1,46 @@
 # -*- coding: utf-8 -*-
 
 
-
-from individual import Individual
+#########################
+# IMPORTS               #
+#########################
 import random
+from numpy import matrix, array, array_equal
+#from genomat.individual import GeneNetwork
+from genomat.geneNetwork import GeneNetwork
+from genomat.config import POP_SIZE, MUTATION_RATE, PARENT_CROSS_COUNT, INITIAL_PHENOTYPE
+import genomat.config as config
+
+
+
+#########################
+# PRE-DECLARATIONS      #
+#########################
+
 
 
 class Population:
 
-    def __init__(self, pop_size, parent_cross_count=2):
+    def __init__(self, configuration):
         """The population is defined by the number of individual it is composed of.
         IN:
-            A number of individuals
-            Count of parents for crossing (default is 2)
+            a configuration that link data name to data value
         OUT:
             A population
         """
-        self.generate_pop(pop_size)
-        self.parent_cross_count = parent_cross_count
+        self.configuration = configuration
+        self.generate_pop(configuration)
 
-    def generate_pop(self, pop_size):
+    def generate_pop(self, configuration):
         """Generate a new population
         IN:
-            Individuals
+            GeneNetworks
         OUT:
             A population
         """
         self.indivs = []
-        for _ in range(pop_size):
-            self.indivs.append(Individual(None)) #TODO: generate matrix
+        for _ in range(configuration[POP_SIZE]):
+            self.indivs.append(GeneNetwork(configuration=configuration)) 
 
     def size(self):
         """Returns the population's size.
@@ -39,43 +51,53 @@ class Population:
         """
         return len(self.indivs)
 
-    def step(self, pop_size=None):
+    def step(self, times=1, configuration=None):
         """Pass to the next generation.
         IN:
-            Size of next generation population (if None, population size will not be changed)
+            times is the number of generation that will be computed.
+                default is one generation.
+            new configuration to apply. No changements if None or 
+                not provided.
         OUT:
             A new generation. The previous generation is overwritten.
         """
-        new_indivs = []
-        pop_size = self.size() if pop_size is None else pop_size
-        while len(new_indivs) < pop_size:
-            parents = random.sample(self.indivs, self.parent_cross_count)
-            test_indiv = Individual.cross_individual(parents)
-            if test_indiv.is_viable():
-                new_indivs.append(test_indiv)
-            # on crée une variable intermédiaire dans laquelle on stocke le nouvel individu le temps de tester sa viabilité
-            # on appelle la fonction "is_viable" de Individuals pour tester cet individu
-            # si cet individu est viable, on l'ajoute à la nouvelle population
-            # sinon, on le supprime
-            #new_indivs.append(Individual.cross_individual(parents))
+        # update configuration if necessary 
+        if configuration is not None: self.configuration = configuration
+        for _ in range(times):
+            new_indivs = []
+            # while population not filled
+            while len(new_indivs) < self.configuration[POP_SIZE]:
+                parents = random.sample(
+                    self.indivs, 
+                    self.configuration[PARENT_CROSS_COUNT]
+                )
+                test_indiv = GeneNetwork.from_crossing(parents)
+                if test_indiv.is_viable(self.configuration):
+                    new_indivs.append(test_indiv)
+            # replace olds by youngs
+            self.indivs = new_indivs
+
+    def gene_KO(self, genes=None):
+        """
+        Put given genes KO. 
+        Genes must be defined by integers (its internally place in the matrix).
+        Population is not garanted totally viable after that.
+        IN:
+            Iterable of integer (in [1;X] with X the number of genes)
+        """
+        return NotImplemented
+
+    def viable_ratio(self):
+        """ Return the ratio of viable individues in population on population size """
+        return len([i for i in self.indivs if i.is_viable(self.configuration)]) / len(self.indivs)
 
     
-
-
-    @staticmethod
-    def random_phenotype(size, generator=lambda:random.choice((-1, 0, 1))):
-        """return a random phenotype, of given size and generator"""
-        return matrix([[generator()] for _ in range(size)])
-
-    @staticmethod
-    def default_phenotype(size):
-        """Return phenotype of given size"""
-        return matrix([[1] for _ in range(size)])
-
-    @staticmethod
-    def create_phenotype(values):
-        """Return phenotype with given values"""
-        return matrix([[v] for v in values])
+    def __str__(self):
+        return("\tPOPULATION: initial phenotype\n" 
+               + str(self.configuration[INITIAL_PHENOTYPE]) 
+               + "\n\tPOPULATION: individuals\n"
+               + '\n'.join((str(i) for i in self.indivs))
+              )
 
 
 
