@@ -5,13 +5,13 @@
 """
 OO implementation of PRJ project.
 
-Things that need to be presents:
-    - individual     : NO
-    - gene network   : NO
-    - population     : NO
-    - crossing       : NO
-    - viability test : NO
-    - mutation       : NO
+Things that need to be implemented:
+    - individual     : YES
+    - gene network   : YES
+    - population     : YES
+    - crossing       : YES
+    - viability test : YES
+    - mutation       : YES
     - KO             : NO
     - interface      : NO
 """
@@ -21,6 +21,7 @@ Things that need to be presents:
 # IMPORTS               #
 #########################
 from genomat.population import Population
+import genomat.config as config 
 
 
 
@@ -36,24 +37,23 @@ from genomat.population import Population
 # MAIN                  #
 #########################
 if __name__ is '__main__':
-    phenotype = Population.default_phenotype
+    phenotype = config.default_phenotype
     # or define our own phenotype
-    phenotype = Population.create_phenotype([1, -1, 1, 0, -1])
+    phenotype = config.create_phenotype([1, -1, 1, 0, -1])
     # or use a randomly created phenotype
-    phenotype = Population.random_phenotype(5)
+    phenotype = config.random_phenotype(size=5)
 
-    pop = Population(size=20, phenotype=phenotype)
-    for _ in range(100):
-        pop.step(phenotype=phenotype)
+    # get config and create pop
+    configuration = config.load()
+    for generation_count in (10, 100, 1000):
+        pop = Population(configuration)
+        pop.step(generation_count)
 
-    print(pop.prettyfied())
+        #print(pop)
 
-    # KO test:
-    # randomly choosen gene is KO now
-    from random import randint
-    target = randint(1, Population.default_genome_size) - 1 # in [0;nb_gene-1]
-    pop.gene_KO(target) 
-    print(pop.viable_ratio(phenotype))
+        # KO test:
+        pop.gene_KO() # randomly choosen gene is KO now
+        print(pop.viable_ratio())
 
 
 
