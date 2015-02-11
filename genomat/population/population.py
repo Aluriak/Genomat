@@ -59,5 +59,23 @@ class Population:
             # sinon, on le supprime
             #new_indivs.append(Individual.cross_individual(parents))
 
+    
+
+
+    @staticmethod
+    def random_phenotype(size, generator=lambda:random.choice((-1, 0, 1))):
+        """return a random phenotype, of given size and generator"""
+        return matrix([[generator()] for _ in range(size)])
+
+    @staticmethod
+    def default_phenotype(size):
+        """Return phenotype of given size"""
+        return matrix([[1] for _ in range(size)])
+
+    @staticmethod
+    def create_phenotype(values):
+        """Return phenotype with given values"""
+        return matrix([[v] for v in values])
+
 
 

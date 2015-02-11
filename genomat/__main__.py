@@ -20,7 +20,7 @@ Things that need to be presents:
 #########################
 # IMPORTS               #
 #########################
-from genomat import Genomat
+from genomat.population import Population
 
 
 
@@ -36,11 +36,13 @@ from genomat import Genomat
 # MAIN                  #
 #########################
 if __name__ is '__main__':
-    phenotype = Genomat.default_phenotype
+    phenotype = Population.default_phenotype
     # or define our own phenotype
-    phenotype = Genomat.phenotype_from([1, -1, 1, 0, -1])
+    phenotype = Population.create_phenotype([1, -1, 1, 0, -1])
+    # or use a randomly created phenotype
+    phenotype = Population.random_phenotype(5)
 
-    pop = Genomat.new_population(size=20, phenotype=phenotype)
+    pop = Population(size=20, phenotype=phenotype)
     for _ in range(100):
         pop.step(phenotype=phenotype)
 
@@ -49,7 +51,7 @@ if __name__ is '__main__':
     # KO test:
     # randomly choosen gene is KO now
     from random import randint
-    target = randint(1, Genomat.default_genome_size) - 1 # in [0;nb_gene-1]
+    target = randint(1, Population.default_genome_size) - 1 # in [0;nb_gene-1]
     pop.gene_KO(target) 
     print(pop.viable_ratio(phenotype))
 
