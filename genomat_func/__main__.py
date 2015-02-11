@@ -17,7 +17,7 @@ Real project is implemented as genomat module.
 #########################
 from functools import partial
 from itertools import product
-from numpy import matrix, array, array_equal#, choose as matrix_choose
+from numpy import matrix, array, array_equal
 import random
 
 
@@ -29,7 +29,7 @@ NB_PARENTS           = 2
 DEFAULT_GENE_NUMBER  = 5
 DEFAULT_POP_SIZE     = 20
 DEFAULT_GENE_VALUE   = partial(random.randint, 0, 9)
-DEFAULT_PHENOTYPE    = array([[random.choice((-1, 0, 1))] for _ in range(DEFAULT_GENE_NUMBER)])
+DEFAULT_PHENOTYPE    = matrix([[random.choice((-1, 0, 1))] for _ in range(DEFAULT_GENE_NUMBER)])
 DEFAULT_MUTATION_RATE= 0.05
 def DEFAULT_THRESHOLDING(phenotype):
     """
@@ -121,7 +121,6 @@ def genome_from(parents, size=DEFAULT_GENE_NUMBER):
     Each line of new genome is randomly choosed from 
     one parent.
     """
-    #return matrix_choose(parents)
     new_indiv = []
     for gene in range(size):
         # for each row choose a parent
@@ -142,9 +141,10 @@ def next_population(pop, is_viable, mutated, size=None):
 
 def genome_is_viable(genotype, initial_phenotype, thresholded=DEFAULT_THRESHOLDING):
     """
-    Genome is viable if its stabilize itself.
-    Stabilization of a genome is verified if thresholding of multiplication of initial_phenotype and genome is
-    equal to stabilized phenotype.
+    Genome is viable if its stabilize itself on a phenotype.
+    A genome is stable iff thresholded phenotype multiplied with genotype 
+    give the same phenotype.
+    This stabilization can happen after many steps.
     """
     def next_phenotype(): return thresholded(genotype.dot(current_phenotype)) 
     walked_phenotypes = list() # matrix are not hashable :(
