@@ -1,0 +1,1 @@
+{"mutation_rate": 0.01, "initial_phenotype": [1, 1, 1, 1, 1], "pop_size": 42, "save_config": 1, "gene_number": 5, "parent_cross_count": 2, "generations": [10, 100, 1000]}
