@@ -15,6 +15,8 @@ from numpy import matrix
 #########################
 # PRE-DECLARATIONS      #
 #########################
+# version of project
+VERSION = '0.1.0'
 # files
 CONFIG_FILE = 'config.json'
 # define keys of config dictionnary
@@ -23,7 +25,7 @@ INITIAL_PHENOTYPE   = 'initial_phenotype'
 MUTATION_RATE       = 'mutation_rate'
 PARENT_CROSS_COUNT  = 'parent_cross_count'
 GENE_NUMBER         = 'gene_number'
-GENERATION_COUNT    = 'generation_count'
+GENERATION_COUNTS   = 'generations'
 # use theses keys
 default_configuration = {
     POP_SIZE:           20,
@@ -31,7 +33,7 @@ default_configuration = {
     MUTATION_RATE:      0.01,
     PARENT_CROSS_COUNT: 2,
     GENE_NUMBER:        5,
-    GENERATION_COUNT:   10,
+    GENERATION_COUNTS:  [10,100,1000],
 }
 
 
