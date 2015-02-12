@@ -1,1 +1,1 @@
-{"gene_number": 5, "parent_cross_count": 2, "mutation_rate": 0.01, "pop_size": 20}
+{"generations": [10, 100, 1000], "initial_phenotype": [1, 1, 1, 1, 1], "pop_size": 20, "gene_number": 5, "mutation_rate": 0.01, "parent_cross_count": 2}
