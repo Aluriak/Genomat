@@ -1,15 +1,29 @@
 # Genomat
 Python3 and numpy project about matrix, genes network and (not exactly) genetic algoritm.  
 
-Use makefile for quick launch of modules.
+Use makefile for quick launch of modules.  
+Use *--help* for have a quick description of available options.  
+
+## requirements
+need pip installable numpy and docopt modules.
+Install them with something like:
+
+        pip install -r requirements.txt
+
+Please be sure to use pip for Python3.
 
 
 ## functionnal way
 Implemented in *genomat\_func* module.
+Incomplete (and doesn't have completeness for goal), 
+don't implement command line arguments and gene KO.
 
 
 ## OO way
 Implemented in *genomat* module.
 
 
+## Some examples of launching
+
+        python -m 
 
