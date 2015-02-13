@@ -41,8 +41,11 @@ class Population:
             A population
         """
         self.indivs = []
-        for _ in range(configuration[POP_SIZE]):
-            self.indivs.append(GeneNetwork(configuration=configuration)) 
+	# while population not filled
+        while len(self.indivs) < self.configuration[POP_SIZE]:
+	    new_indiv = GeneNetwork(configuration=configuration)
+	    if new_indiv.is_viable(self.configuration):
+                self.indivs.append(new_indiv) 
 
     def size(self):
         """Returns the population's size.
