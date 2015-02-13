@@ -1,15 +1,48 @@
 # Genomat
 Python3 and numpy project about matrix, genes network and (not exactly) genetic algoritm.  
 
-Use makefile for quick launch of modules.
+Use makefile for quick launch of modules.  
+*make tt* launch few unit tests.  
+Use *--help* for have a quick description of available options.  
+
+## requirements
+need pip installable numpy and docopt modules.
+Install them with something like:
+
+        pip install -r requirements.txt
+
+Please be sure to use pip for Python3.
 
 
 ## functionnal way
 Implemented in *genomat\_func* module.
+Incomplete (and doesn't have completeness for goal), 
+don't implement command line arguments and gene KO.
 
 
 ## OO way
 Implemented in *genomat* module.
 
+
+## Some examples of launching
+For launch a simulation with a population of 42 individues:
+
+        python -m genomat --pop_size=42
+
+The same, but remember this in configuration file:
+
+        python -m genomat --pop_size=42 --save_config
+
+Do some stats (put in csv file *data/stats.csv*):
+
+        python -m genomat --do_stats
+
+Do stats, and put them in *data/coolstats.csv* after delete previous stats in it:  
+
+        python -m genomat --do_stats --stats_file='data/coolstats.csv' --erase_previous_stats
+
+TOTAL MADNESS !
+
+        python -m genomat --pop_size=100 --parent_number=6 --mutation_rate=0.99 --generations=10,50,100,500,1000,5000 --gene_number=6 --do_stats
 
 
