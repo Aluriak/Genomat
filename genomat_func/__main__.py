@@ -33,7 +33,7 @@ DEFAULT_PHENOTYPE    = matrix([[1] for _ in range(DEFAULT_GENE_NUMBER)])
 def DEFAULT_THRESHOLDING(phenotype):
     """
     Threshold function for a phenotype
-    for each gene, >0 become 1 and <0 become -1
+    for each gene, >0 becomes 1 and <0 becomes -1
     """
     # verification, sign declaration, return thresholded phenotype
     assert(phenotype.shape == (DEFAULT_GENE_NUMBER, 1))
@@ -47,7 +47,7 @@ def DEFAULT_THRESHOLDING(phenotype):
 #########################
 def init_genome(size=DEFAULT_GENE_NUMBER, random_value=DEFAULT_GENE_VALUE):
     """
-    Return genome, define as dict that link a gene id A and another gene id B to interaction of 
+    Return genome, define as dict that links a gene id A and another gene id B to interaction of
     gene A on gene B.
 
     So:
@@ -86,7 +86,7 @@ def prettyfied_genome(genome, size=DEFAULT_GENE_NUMBER):
     return str(genome)
 
 def prettyfied_population(pop, genome_size=DEFAULT_GENE_NUMBER):
-    return ('\nPOPULATION:\n' 
+    return ('\nPOPULATION:\n'
             + '\n'.join([prettyfied_genome(ind, genome_size) for ind in pop]))
 
 
@@ -98,7 +98,7 @@ def prettyfied_population(pop, genome_size=DEFAULT_GENE_NUMBER):
 def genome_from(parents, size=DEFAULT_GENE_NUMBER):
     """
     Return a new genome, create by cross received genomes.
-    Each line of new genome is randomly choosed from 
+    Each line of new genome is randomly choosed from
     one parent.
     """
     new_indiv = []
@@ -134,8 +134,8 @@ def genome_is_viable(genome, initial_phenotype, thresholding=DEFAULT_THRESHOLDIN
 # MAIN FUNCTION         #
 #########################
 if __name__ is '__main__':
-    genome_is_viable = partial(genome_is_viable, 
-                               initial_phenotype=DEFAULT_PHENOTYPE, 
+    genome_is_viable = partial(genome_is_viable,
+                               initial_phenotype=DEFAULT_PHENOTYPE,
                                thresholding=DEFAULT_THRESHOLDING
                               )
     p = init_population(10, genome_is_viable)
