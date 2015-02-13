@@ -53,18 +53,18 @@ if __name__ is '__main__':
     # parse args and add them to args configuration
     config_args = {}
     arguments = docopt(__doc__, version=config.VERSION)
-    filtered_arguments = {key:val 
+    filtered_arguments = {key[2:]:val # don't keep the '--' at the beginning
                           for key, val in arguments.items() 
-                          if val is not None and key[0:2] == '--'
+                          if val is not None and key.startswith('--')
                          }
     # update config_args with values, cast in int or [int,…] if necessary
     for key, val in filtered_arguments.items():
-        if key == '--generations':
-            config_args[key] = [int(_) for _ in val.split(',')]
-        elif 'file' in key:
+        if 'file' in key:
             config_args[key] = val
         elif '.' in str(val):
             config_args[key] = float(val)
+        elif key == config.GENERATION_COUNTS:
+            config_args[key] = [int(_) for _ in val.split(',')]
         else:
             config_args[key] = int(val)
     # load configuration from file
@@ -73,10 +73,10 @@ if __name__ is '__main__':
     configuration = ChainMap({}, config_args, config_file)
 
     # save it if asked
-    if arguments['--save_config']:
+    if configuration['save_config']:
         config.save(dict(configuration), filename=configuration[config.CONFIG_FILE])
     # erase stats if asked
-    if configuration['--erase_previous_stats']:
+    if configuration['erase_previous_stats']:
         with open(configuration[config.STATS_FILE], 'w') as f:
             pass
 
