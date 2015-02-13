@@ -1,13 +1,13 @@
 
 
 run_genomat:
-	python -m genomat
+	python3 -m genomat
 
 tt:
-	python unittests.py
+	python3 unittests.py
 
 run_genomat_func:
-	python -m genomat_func
+	python3 -m genomat_func
 
 
 clear:
