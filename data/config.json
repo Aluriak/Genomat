@@ -1,1 +1,39 @@
-{"mutation_rate": 0.01, "initial_phenotype": [1, 1, 1, 1, 1], "pop_size": 42, "save_config": 1, "gene_number": 5, "parent_cross_count": 2, "generations": [10, 100, 1000]}
+{
+    "generations":[
+        10,
+        100,
+        1000
+    ],
+    "--gene_number":5,
+    "initial_phenotype":[
+        1,
+        1,
+        1,
+        1,
+        1
+    ],
+    "parent_cross_count":2,
+    "--do_stats":0,
+    "--stats_file":"data/stats.csv",
+    "--initial_phenotype":[
+        1,
+        1,
+        1,
+        1,
+        1
+    ],
+    "pop_size":20,
+    "--config_file":"data/config.json",
+    "--mutation_rate":0.01,
+    "--parent_number":2,
+    "mutation_rate":0.01,
+    "gene_number":5,
+    "--save_config":1,
+    "--erase_previous_stats":0,
+    "save_config":1,
+    "--pop_size":41,
+    "--generations":[
+        10,
+        100
+    ]
+}
