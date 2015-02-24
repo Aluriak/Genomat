@@ -35,6 +35,7 @@ from collections import ChainMap
 from genomat.population import Population
 import genomat.config as config 
 from docopt import docopt
+import csv
 
 
 
@@ -78,7 +79,9 @@ if __name__ is '__main__':
     # erase stats if asked
     if configuration['erase_previous_stats']:
         with open(configuration[config.STATS_FILE], 'w') as f:
-            pass
+            fieldnames = config.stats_file_keys(configuration[config.GENE_NUMBER])
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
 
     # print used configuration
     print('USED CONFIGURATION IS:\n', config.prettify(configuration, '\t'), "\n---------------\n", sep='')
