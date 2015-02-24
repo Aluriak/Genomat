@@ -6,10 +6,7 @@
 OO implementation of PRJ project.
 
 Usage:
-    __main__.py [--pop_size=<COUNT>] [--generations=<COUNT>[(,<COUNT>)]...] 
-                [--gene_number=<COUNT>] [--parent_number=<COUNT>] [--mutation_rate=<RATE>]
-                [--save_config] [--do_stats] [--stats_file=<FILE>] [--erase_previous_stats]
-                [--config_file=<FILE>]
+    __main__.py [options] 
 
 Options:
     -v --version            show version
@@ -24,6 +21,7 @@ Options:
     --do_stats              save stats about each step in stats file    
     --stats_file=<FILE>     save stats in FILE                           
     --erase_previous_stats  delete previous stats data in stats file    
+    --use_db_in_stats       normalize statistics with dB unit
 
 """
 
