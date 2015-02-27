@@ -14,9 +14,9 @@ badd +1 phenotype/phenotype.py
 badd +1 individual/individual.py
 badd +1 gene_network/geneNetwork.py
 badd +1 ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat_func/__main__.py
-badd +1 gene_network/geneNetwork.py
-badd +0 config/config.py
-badd +0 geneNetwork/geneNetwork.py
+badd +1 config/config.py
+badd +1 geneNetwork/geneNetwork.py
+badd +0 stats/stats.py
 argglobal
 silent! argdel *
 argadd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/__main__.py
@@ -42,7 +42,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 43 - ((41 * winheight(0) + 28) / 56)
+let s:l = 43 - ((29 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -66,7 +66,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 28) / 56)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -90,7 +90,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 28) / 56)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -114,12 +114,36 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 28) / 56)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
+lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
+tabedit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/stats/stats.py
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+edit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/stats/stats.py
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 3 - ((2 * winheight(0) + 19) / 39)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+3
+normal! 025|
 lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
 tabedit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat_func/__main__.py
 set splitbelow splitright
@@ -139,14 +163,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 144 - ((25 * winheight(0) + 28) / 56)
+let s:l = 144 - ((17 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 144
 normal! 034|
 lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
-tabnext 4
+tabnext 5
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

@@ -20,8 +20,7 @@ Options:
     --config_file=<FILE>    path to config file in json format [default: data/config.json]
     --do_stats              save stats about each step in stats file    
     --stats_file=<FILE>     save stats in FILE                           
-    --erase_previous_stats  delete previous stats data in stats file    
-    --use_db_in_stats       normalize statistics with dB unit
+    --erase_previous_stats  delete previous stats data in stats file   
     --wideness_gene=<COUNT>	change the wideness of normal law used create 1st generation
     --wideness_mut=<COUNT>	chande the wideness of normal law used in case of mutation
 
@@ -35,6 +34,7 @@ from collections        import ChainMap
 from genomat.population import Population
 from docopt             import docopt
 import genomat.config as config 
+import genomat.stats  as stats
 import csv
 
 
@@ -76,12 +76,9 @@ if __name__ is '__main__':
     # save it if asked
     if configuration['save_config']:
         config.save(dict(configuration), filename=configuration[config.CONFIG_FILE])
-    # erase stats if asked
-    if configuration['erase_previous_stats']:
-        with open(configuration[config.STATS_FILE], 'w') as f:
-            fieldnames = config.stats_file_keys(configuration[config.GENE_NUMBER])
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
+    # do stats if asked
+    if configuration[config.DO_STATS]:
+        stats.initialize(configuration)
 
     # print used configuration
     print('USED CONFIGURATION IS:\n', config.prettify(configuration, '\t'), "\n---------------\n", sep='')
@@ -106,6 +103,10 @@ if __name__ is '__main__':
         deactivated_genes, viability_ratio = pop.test_genes()
         print('DEACTIVATED GENE      :', deactivated_genes)
         print('RATIO OF SURVIVABILITY:', viability_ratio, '\n---------------\n')
+    
+
+    # finalize all
+    stats.finalize()
 
 
 

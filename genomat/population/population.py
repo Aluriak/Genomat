@@ -4,11 +4,13 @@
 #########################
 # IMPORTS               #
 #########################
+import concurrent.futures
 import random
-import csv
-import math
-from numpy import matrix, array, array_equal
+
 import genomat.config as config
+import genomat.stats  as stats
+
+from numpy               import matrix, array, array_equal
 from genomat.geneNetwork import GeneNetwork
 from genomat.config      import POP_SIZE, MUTATION_RATE, GENE_NUMBER
 from genomat.config      import PARENT_COUNT, INITIAL_PHENOTYPE, DO_STATS, STATS_FILE
@@ -33,7 +35,6 @@ class Population:
         """
         self.configuration = configuration
         self.generate_pop(configuration)
-        self.stats_file = None
 
     def generate_pop(self, configuration):
         """Generate a new population
@@ -43,20 +44,14 @@ class Population:
             A population
         """
         self.indivs = []
+        create_progress_bar()
         # while population not filled
-        while len(self.indivs) < self.configuration[POP_SIZE]:
-            new_indiv = GeneNetwork(configuration=configuration)
-            if new_indiv.is_viable(self.configuration):
-                self.indivs.append(new_indiv) 
-
-    def size(self):
-        """Returns the population's size.
-        IN:
-            The population
-        OUT:
-            The population's size
-        """
-        return len(self.indivs)
+        for _ in range(self.configuration[POP_SIZE]):
+            self.indivs.append(
+                GeneNetwork.viable_from_configuration(configuration)
+            )
+            update_progress_bar(self.size, self.configuration[POP_SIZE]+1)
+        finish_progress_bar()
 
     def step(self, times=1, configuration=None):
         """Pass to the next generation.
@@ -71,37 +66,49 @@ class Population:
         # update configuration if necessary 
         if configuration is not None: self.configuration = configuration
         del configuration
-        # init stats
-        if self.configuration[DO_STATS]:
-            self.init_stats_file(self.configuration[STATS_FILE])
+
         # do generations computing
         create_progress_bar()
-        for generation_number in range(times):
-            new_indivs = []
-            # while population not filled
-            while len(new_indivs) < self.configuration[POP_SIZE]:
-                parents = random.sample(
-                    self.indivs, 
-                    self.configuration[PARENT_COUNT]
-                )
-                test_indiv = GeneNetwork.mutated(
-                    GeneNetwork.from_crossing(parents), 
-                    self.configuration
-                )
-                if test_indiv.is_viable(self.configuration):
-                    new_indivs.append(test_indiv)
-            # replace olds by youngs
-            self.indivs = new_indivs
-            # do stats on youngs
-            if self.configuration[DO_STATS]: 
-                self.do_stats(generation_number)
-            # show to user that its computer is doing something
-            update_progress_bar(generation_number, times)
+        try:
+            for generation_number in range(times):
+                new_indivs = []
+                # while population not filled
+                pop_size = self.configuration[POP_SIZE]
+                with concurrent.futures.ProcessPoolExecutor() as executor:
+                    for new_indiv in executor.map(self.new_viable_indiv, [None]*pop_size):
+                        new_indivs.append(new_indiv)
+                assert(self.size == pop_size)
+                # replace olds by youngs
+                self.indivs = new_indivs
+                # do stats on youngs
+                stats.update(self, generation_number)
+                # show to user that its computer is doing something
+                update_progress_bar(generation_number, times)
+        except (KeyboardInterrupt, concurrent.futures.process.BrokenProcessPool):
+            pass
+
         # finish it !
         finish_progress_bar()
-        # close stats file
-        if self.configuration[DO_STATS]:
-            self.stats_file.close()
+
+
+    def new_viable_indiv(self, none=None):
+        """
+        Return a new indiv, create from population crossing, 
+        eventually mutated. Indiv is viable.
+        Nothing keyword is an unused arg used for give map compatibility.
+        """
+        new_indiv = None
+        while new_indiv is None or not new_indiv.is_viable(self.configuration):
+            parents = random.sample(
+                self.indivs, 
+                self.configuration[PARENT_COUNT]
+            )
+            new_indiv = GeneNetwork.mutated(
+                GeneNetwork.from_crossing(parents), 
+                self.configuration
+            )
+        return new_indiv
+
 
     def deactivate_genes(self, genes=None):
         """
@@ -155,29 +162,10 @@ class Population:
                + '\n'.join((str(i) for i in self.indivs))
               )
 
-    def do_stats(self, generation_number=0):
-        """Add stats to stat file, optionnaly given"""
-        # init
-        assert(self.stats_file is not None)
-        gene_number = self.configuration[GENE_NUMBER]
-        ratios = [self.test_genes([gene])[1] for gene in range(gene_number)]
-        # use dB if asked
-        if self.configuration[config.USE_DB_IN_STATS]:
-            ratios = [math.log(r+1/len(self.indivs), 10) for r in ratios]
-        # get values and write them in file
-        self.writer.writerow(config.stats_file_values(
-            len(self.indivs),
-            gene_number,
-            generation_number,
-            *[ratios]
-        ))
 
-    def init_stats_file(self, filename):
-        """Initialize stat file for allow do_stats to work"""
-        self.stats_file = open(filename, 'a')
-        gene_number = self.configuration[config.GENE_NUMBER]
-        self.writer = csv.DictWriter(self.stats_file, 
-                                     fieldnames=config.stats_file_keys(gene_number)
-                                    )
+    @property
+    def size(self):
+        return len(self.indivs)
+
 
 

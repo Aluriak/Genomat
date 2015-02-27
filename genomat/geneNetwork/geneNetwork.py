@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Module that describes GeneNetwork class.
+"""
 
 #########################
 # IMPORTS               #
@@ -16,21 +19,31 @@ import random
 #########################
 
 class GeneNetwork():
+    """
+    A GeneNetwork is something like a 2 dimensions matrix 
+    that describes regulation of genes.
+    So:
+        2 3
+        1 0
+    Can be translated as :
+        gene 0 promotes itself by factor 2
+        gene 0 promotes gene 1 by factor 3
+        gene 1 promotes gene 0 by factor 1
+        gene 1 promotes itself by factor 0
 
-    def __init__(self, *, nmatrix=None, configuration=None):
+    Used values heavily depends of given configuration,
+    and methods provided.
+    """
+
+    def __init__(self, nmatrix):
         """Each individual's genes network is defined by a square matrix.
         IN:
             A n*n numpy matrix which describes the genes network.
                 If None or not provided, generate a random matrix
                 based on configuration informations
-            configuration is a configuration dictionnary.
-            NB: matrix and configuration can't be provided at the same time.
         """
-        assert((nmatrix is None) != (configuration is None))
-        if nmatrix is None:
-            self.genome = GeneNetwork.matrix_from(configuration)
-        else:
-            self.genome = nmatrix
+        assert(nmatrix is not None)
+        self.genome = nmatrix
         self.genome_preserved = self.genome # only used if gene deactivation
 
 
@@ -141,6 +154,17 @@ class GeneNetwork():
             parent = array(random.choice(genes_networks).genome)
             new_indiv.append(parent[gene])
         return GeneNetwork(nmatrix=matrix(new_indiv))
+
+    @staticmethod
+    def viable_from_configuration(configuration):
+        """Return a new GeneNetwork instance, create from data
+        in given configuration. 
+        Returned instance is viable in given configuration.
+        """
+        gn = GeneNetwork(GeneNetwork.matrix_from(configuration))
+        while not gn.is_viable(configuration):
+            gn = GeneNetwork(GeneNetwork.matrix_from(configuration))
+        return gn
 
     @staticmethod
     def matrix_from(configuration):

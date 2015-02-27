@@ -32,7 +32,6 @@ GENERATION_COUNTS   = 'generations'
 THRESOLDED_FUNC     = 'thresholded_func'
 RANDOM_GENE_VAL_FUNC= 'random_gene_val_func'
 MUTATED_FUNC        = 'mutated_func'
-USE_DB_IN_STATS     = 'use_db_in_stats'
 WIDENESS_GENE       = 'wideness_gene'
 WIDENESS_MUT        = 'wideness_mut'
 # use theses keys
@@ -45,29 +44,9 @@ default_configuration = {
     GENERATION_COUNTS:      [10,100],
     CONFIG_FILE:            'data/config.json',
     STATS_FILE:             'data/stats.csv',
-    USE_DB_IN_STATS:        False,
     WIDENESS_GENE:          100,
 	WIDENESS_MUT:           10,
 }
-# content stats file 
-def stats_file_keys(gene_number):
-    """Return fiels in stats file, ordered, as a list of string"""
-    return [
-            'popsize',
-            'genenumber',
-            'generationnumber',
-        ] + ['viabilityratio' + str(i) for i in range(gene_number)]
-def stats_file_values(pop_size, gene_number, generation_number, viability_ratios):
-    """Return a dict usable with csv.DictWriter for stats file"""
-    values = {
-        'popsize':         pop_size,
-        'genenumber':      gene_number,
-        'generationnumber':generation_number
-    }
-    values.update({('viabilityratio'+str(index)):ratio 
-                   for index, ratio in enumerate(viability_ratios)
-                  })
-    return values
 
 
 #########################
@@ -175,15 +154,16 @@ def prettify(configuration, prefix=''):
     """Return str vision of configuration, ready to be print"""
     to_print = {
         prefix+'gene number      :\t': configuration[GENE_NUMBER],
-        prefix+'pop size         :\t': configuration[POP_SIZE],
+        #prefix+'pop size         :\t': configuration[POP_SIZE],
         prefix+'init phenotype   :\n': configuration[INITIAL_PHENOTYPE],
         prefix+'mutation rate    :\t': configuration[MUTATION_RATE],
-        prefix+'generations      :\t': ','.join(
-            str(_) for _ in configuration[GENERATION_COUNTS]
-        ),
+        #prefix+'generations      :\t': ','.join(
+            #str(_) for _ in configuration[GENERATION_COUNTS]
+        #),
         prefix+'parent count     :\t': configuration[PARENT_COUNT],
         prefix+'gene wideness    :\t': configuration[WIDENESS_GENE],
         prefix+'mutation wideness:\t': configuration[WIDENESS_MUT],
+        prefix+'perform stats    :\t': 'yes' if configuration[DO_STATS] else 'no',
     }
     return (
         '\n'.join((k + str(v) for k, v in to_print.items()))
