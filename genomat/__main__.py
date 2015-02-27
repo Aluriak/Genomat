@@ -22,6 +22,8 @@ Options:
     --stats_file=<FILE>     save stats in FILE                           
     --erase_previous_stats  delete previous stats data in stats file    
     --use_db_in_stats       normalize statistics with dB unit
+    --wideness_gene=<COUNT>	change the wideness of normal law used create 1st generation
+    --wideness_mut=<COUNT>	chande the wideness of normal law used in case of mutation
 
 """
 
@@ -29,10 +31,10 @@ Options:
 #########################
 # IMPORTS               #
 #########################
-from collections import ChainMap
+from collections        import ChainMap
 from genomat.population import Population
+from docopt             import docopt
 import genomat.config as config 
-from docopt import docopt
 import csv
 
 

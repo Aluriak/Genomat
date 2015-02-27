@@ -9,7 +9,8 @@
 #########################
 import json
 import random
-from numpy import matrix
+from numpy     import matrix
+from functools import partial
 
 
 #########################
@@ -32,6 +33,8 @@ THRESOLDED_FUNC     = 'thresholded_func'
 RANDOM_GENE_VAL_FUNC= 'random_gene_val_func'
 MUTATED_FUNC        = 'mutated_func'
 USE_DB_IN_STATS     = 'use_db_in_stats'
+WIDENESS_GENE       = 'wideness_gene'
+WIDENESS_MUT        = 'wideness_mut'
 # use theses keys
 default_configuration = {
     POP_SIZE:               20,
@@ -43,6 +46,8 @@ default_configuration = {
     CONFIG_FILE:            'data/config.json',
     STATS_FILE:             'data/stats.csv',
     USE_DB_IN_STATS:        False,
+    WIDENESS_GENE:          100,
+	WIDENESS_MUT:           10,
 }
 # content stats file 
 def stats_file_keys(gene_number):
@@ -84,7 +89,7 @@ def save(configuration=None, filename=default_configuration[CONFIG_FILE]):
 def load(filename=default_configuration[CONFIG_FILE]):
     """
     Load configuration from given file. If not found or incomplete
-    recording, default configuration is used for fill the blinks.
+    recording, default configuration is used for fill in the blanks.
     """
     config = default()
     try:
@@ -112,8 +117,8 @@ def json2usable(configuration):
     ])
     # add functions
     configuration[THRESOLDED_FUNC]      = thresholded
-    configuration[RANDOM_GENE_VAL_FUNC] = random_gene_value
-    configuration[MUTATED_FUNC]         = mutated_value
+    configuration[RANDOM_GENE_VAL_FUNC] = partial(random_gene_value, configuration[WIDENESS_GENE])
+    configuration[MUTATED_FUNC]         = partial(mutated_value, amplitude_mut=configuration[WIDENESS_MUT])
     # conversion done !
     return configuration
 
@@ -143,16 +148,16 @@ def thresholded(phenotype):
     def sign(x): return (1 if x > 0 else (-1 if x < 0 else 0))
     return matrix([[sign(gene_expr)] for gene_expr in phenotype])
 
-def random_gene_value():
+def random_gene_value(amplitude_gene):
     """
-    Return a value randomly choosed that 
+    Return a randomly value choosen that 
     can be used as a gene value
     """
-    return random.randint(-9, 9)
+    return int(random.gauss(0, 1) * amplitude_gene)
 
-def mutated_value(value):
+def mutated_value(value, amplitude_mut):
     """return a randomly choosen mutated equivalent of given value"""
-    return value + random.choice((1, -1))
+    return value + int((random.gauss(0, 1) * amplitude_mut))
 
 def random_phenotype(size, generator=lambda:random.choice((-1, 0, 1))):
     """return a random phenotype, of given size and generator"""
@@ -169,14 +174,16 @@ def create_phenotype(values):
 def prettify(configuration, prefix=''):
     """Return str vision of configuration, ready to be print"""
     to_print = {
-        prefix+'gene number   :\t': configuration[GENE_NUMBER],
-        prefix+'pop size      :\t': configuration[POP_SIZE],
-        prefix+'init phenotype:\n': configuration[INITIAL_PHENOTYPE],
-        prefix+'mutation rate :\t': configuration[MUTATION_RATE],
-        prefix+'generations   :\t': ','.join(
+        prefix+'gene number      :\t': configuration[GENE_NUMBER],
+        prefix+'pop size         :\t': configuration[POP_SIZE],
+        prefix+'init phenotype   :\n': configuration[INITIAL_PHENOTYPE],
+        prefix+'mutation rate    :\t': configuration[MUTATION_RATE],
+        prefix+'generations      :\t': ','.join(
             str(_) for _ in configuration[GENERATION_COUNTS]
         ),
-        prefix+'parent count  :\t': configuration[PARENT_COUNT],
+        prefix+'parent count     :\t': configuration[PARENT_COUNT],
+        prefix+'gene wideness    :\t': configuration[WIDENESS_GENE],
+        prefix+'mutation wideness:\t': configuration[WIDENESS_MUT],
     }
     return (
         '\n'.join((k + str(v) for k, v in to_print.items()))
