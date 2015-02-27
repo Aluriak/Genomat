@@ -19,8 +19,6 @@ import random
 #########################
 
 class GeneNetwork():
-
-    def __init__(self, *, nmatrix=None, configuration=None):
     """
     A GeneNetwork is something like a 2 dimensions matrix 
     that describes regulation of genes.
@@ -36,19 +34,16 @@ class GeneNetwork():
     Used values heavily depends of given configuration,
     and methods provided.
     """
+
+    def __init__(self, nmatrix):
         """Each individual's genes network is defined by a square matrix.
         IN:
             A n*n numpy matrix which describes the genes network.
                 If None or not provided, generate a random matrix
                 based on configuration informations
-            configuration is a configuration dictionnary.
-            NB: matrix and configuration can't be provided at the same time.
         """
-        assert((nmatrix is None) != (configuration is None))
-        if nmatrix is None:
-            self.genome = GeneNetwork.matrix_from(configuration)
-        else:
-            self.genome = nmatrix
+        assert(nmatrix is not None)
+        self.genome = nmatrix
         self.genome_preserved = self.genome # only used if gene deactivation
 
 
@@ -159,6 +154,17 @@ class GeneNetwork():
             parent = array(random.choice(genes_networks).genome)
             new_indiv.append(parent[gene])
         return GeneNetwork(nmatrix=matrix(new_indiv))
+
+    @staticmethod
+    def viable_from_configuration(configuration):
+        """Return a new GeneNetwork instance, create from data
+        in given configuration. 
+        Returned instance is viable in given configuration.
+        """
+        gn = GeneNetwork(GeneNetwork.matrix_from(configuration))
+        while not gn.is_viable(configuration):
+            gn = GeneNetwork(GeneNetwork.matrix_from(configuration))
+        return gn
 
     @staticmethod
     def matrix_from(configuration):
