@@ -149,13 +149,14 @@ def prettify(configuration, prefix=''):
     """Return str vision of configuration, ready to be print"""
     to_print = {
         prefix+'gene number   :\t': configuration[GENE_NUMBER],
-        prefix+'pop size      :\t': configuration[POP_SIZE],
+        #prefix+'pop size      :\t': configuration[POP_SIZE],
         prefix+'init phenotype:\n': configuration[INITIAL_PHENOTYPE],
         prefix+'mutation rate :\t': configuration[MUTATION_RATE],
-        prefix+'generations   :\t': ','.join(
-            str(_) for _ in configuration[GENERATION_COUNTS]
-        ),
+        #prefix+'generations   :\t': ','.join(
+            #str(_) for _ in configuration[GENERATION_COUNTS]
+        #),
         prefix+'parent count  :\t': configuration[PARENT_COUNT],
+        prefix+'perform stats :\t': 'yes' if configuration[DO_STATS] else 'no',
     }
     return (
         '\n'.join((k + str(v) for k, v in to_print.items()))
