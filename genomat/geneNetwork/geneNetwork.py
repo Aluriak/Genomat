@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Module that describes GeneNetwork class.
+"""
 
 #########################
 # IMPORTS               #
@@ -18,6 +21,21 @@ import random
 class GeneNetwork():
 
     def __init__(self, *, nmatrix=None, configuration=None):
+    """
+    A GeneNetwork is something like a 2 dimensions matrix 
+    that describes regulation of genes.
+    So:
+        2 3
+        1 0
+    Can be translated as :
+        gene 0 promotes itself by factor 2
+        gene 0 promotes gene 1 by factor 3
+        gene 1 promotes gene 0 by factor 1
+        gene 1 promotes itself by factor 0
+
+    Used values heavily depends of given configuration,
+    and methods provided.
+    """
         """Each individual's genes network is defined by a square matrix.
         IN:
             A n*n numpy matrix which describes the genes network.
