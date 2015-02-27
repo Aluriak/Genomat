@@ -1,4 +1,4 @@
-#OPTIONS=--use_db_in_stats
+OPTIONS=
 
 run_genomat:
 	python3 -m genomat $(OPTIONS)

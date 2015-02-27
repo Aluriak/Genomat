@@ -31,7 +31,6 @@ GENERATION_COUNTS   = 'generations'
 THRESOLDED_FUNC     = 'thresholded_func'
 RANDOM_GENE_VAL_FUNC= 'random_gene_val_func'
 MUTATED_FUNC        = 'mutated_func'
-USE_DB_IN_STATS     = 'use_db_in_stats'
 # use theses keys
 default_configuration = {
     POP_SIZE:               20,
@@ -42,27 +41,7 @@ default_configuration = {
     GENERATION_COUNTS:      [10,100],
     CONFIG_FILE:            'data/config.json',
     STATS_FILE:             'data/stats.csv',
-    USE_DB_IN_STATS:        False,
 }
-# content stats file 
-def stats_file_keys(gene_number):
-    """Return fiels in stats file, ordered, as a list of string"""
-    return [
-            'popsize',
-            'genenumber',
-            'generationnumber',
-        ] + ['viabilityratio' + str(i) for i in range(gene_number)]
-def stats_file_values(pop_size, gene_number, generation_number, viability_ratios):
-    """Return a dict usable with csv.DictWriter for stats file"""
-    values = {
-        'popsize':         pop_size,
-        'genenumber':      gene_number,
-        'generationnumber':generation_number
-    }
-    values.update({('viabilityratio'+str(index)):ratio 
-                   for index, ratio in enumerate(viability_ratios)
-                  })
-    return values
 
 
 #########################

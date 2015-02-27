@@ -5,10 +5,9 @@
 # IMPORTS               #
 #########################
 import random
-import csv
-import math
 from numpy import matrix, array, array_equal
 import genomat.config as config
+import genomat.stats  as stats
 from genomat.geneNetwork import GeneNetwork
 from genomat.config      import POP_SIZE, MUTATION_RATE, GENE_NUMBER
 from genomat.config      import PARENT_COUNT, INITIAL_PHENOTYPE, DO_STATS, STATS_FILE
@@ -33,7 +32,6 @@ class Population:
         """
         self.configuration = configuration
         self.generate_pop(configuration)
-        self.stats_file = None
 
     def generate_pop(self, configuration):
         """Generate a new population
@@ -71,9 +69,6 @@ class Population:
         # update configuration if necessary 
         if configuration is not None: self.configuration = configuration
         del configuration
-        # init stats
-        if self.configuration[DO_STATS]:
-            self.init_stats_file(self.configuration[STATS_FILE])
         # do generations computing
         create_progress_bar()
         for generation_number in range(times):
@@ -93,15 +88,11 @@ class Population:
             # replace olds by youngs
             self.indivs = new_indivs
             # do stats on youngs
-            if self.configuration[DO_STATS]: 
-                self.do_stats(generation_number)
+            stats.update(self, generation_number)
             # show to user that its computer is doing something
             update_progress_bar(generation_number, times)
         # finish it !
         finish_progress_bar()
-        # close stats file
-        if self.configuration[DO_STATS]:
-            self.stats_file.close()
 
     def deactivate_genes(self, genes=None):
         """
@@ -155,29 +146,10 @@ class Population:
                + '\n'.join((str(i) for i in self.indivs))
               )
 
-    def do_stats(self, generation_number=0):
-        """Add stats to stat file, optionnaly given"""
-        # init
-        assert(self.stats_file is not None)
-        gene_number = self.configuration[GENE_NUMBER]
-        ratios = [self.test_genes([gene])[1] for gene in range(gene_number)]
-        # use dB if asked
-        if self.configuration[config.USE_DB_IN_STATS]:
-            ratios = [math.log(r+1/len(self.indivs), 10) for r in ratios]
-        # get values and write them in file
-        self.writer.writerow(config.stats_file_values(
-            len(self.indivs),
-            gene_number,
-            generation_number,
-            *[ratios]
-        ))
 
-    def init_stats_file(self, filename):
-        """Initialize stat file for allow do_stats to work"""
-        self.stats_file = open(filename, 'a')
-        gene_number = self.configuration[config.GENE_NUMBER]
-        self.writer = csv.DictWriter(self.stats_file, 
-                                     fieldnames=config.stats_file_keys(gene_number)
-                                    )
+    @property
+    def size(self):
+        return len(self.indivs)
+
 
 
