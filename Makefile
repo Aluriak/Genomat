@@ -1,5 +1,5 @@
 OPTIONS=
-#STATS=--erase_previous_stats --do_stats 
+STATS=--erase_previous_stats --do_stats 
 
 run_genomat:
 	python3 -m genomat $(OPTIONS) $(STATS)
