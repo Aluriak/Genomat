@@ -45,7 +45,7 @@ default_configuration = {
     CONFIG_FILE:            'data/config.json',
     STATS_FILE:             'data/stats.csv',
     WIDENESS_GENE:          100,
-	WIDENESS_MUT:           10,
+    WIDENESS_MUT:           10,
 }
 
 
