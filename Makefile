@@ -5,7 +5,7 @@ run_genomat:
 	python3 -m genomat $(OPTIONS) $(STATS)
 
 test_computation:
-	python3 -m genomat --mutation_rate=0.1 --pop_size=10 --generations=60 $(OPTIONS) $(STATS)
+	python3 -m genomat --mutation_rate=0.1 --pop_size=50 --generations=200 $(OPTIONS) $(STATS)
 
 computation:
 	python3 -m genomat --generations=300 --pop_size=100 --mutation_rate=0.1 $(OPTIONS) $(STATS)
