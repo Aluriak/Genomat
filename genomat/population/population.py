@@ -167,5 +167,10 @@ class Population:
     def size(self):
         return len(self.indivs)
 
+    @property
+    def genotype_count(self):
+        """return integer equal to number of different genotype in population"""
+        return len(set(self.indivs))
+
 
 
