@@ -2,7 +2,8 @@ OPTIONS=
 STATS=--erase_previous_stats --do_stats 
 
 run_genomat:
-	python3 -m genomat $(OPTIONS) $(STATS)
+	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.1$(OPTION) $(STATS)
+	mv data/stats.csv doc/200x300x1.csv
 
 test_computation:
 	python3 -m genomat --mutation_rate=0.1 --pop_size=50 --generations=200 $(OPTIONS) $(STATS)
