@@ -17,7 +17,13 @@ import random
 #########################
 # PRE-DECLARATIONS      #
 #########################
+EPSILON = 0.1
 
+
+
+#########################
+# GENE NETWORK CLASS    #
+#########################
 class GeneNetwork():
     """
     A GeneNetwork is something like a 2 dimensions matrix 
@@ -180,4 +186,19 @@ class GeneNetwork():
     def __str__(self):
         return str(self.genome)
 
+    def __equ__(self, othr):
+        """Two genes network are equal when have the same gene number 
+        and have exactly the same regulation coefficient.
+        EPSILON value is used for estimate equality of coefficients."""
+        return self.gene_number is othr.gene_number and all(
+            abs(self_val - othr_val) < EPSILON
+            for self_val, othr_val in zip(self_gene_vals, othr_gene_vals)
+            for self_gene_vals, othr_gene_vals in zip(array(self), array(othr))
+        )
+
+    @property
+    def gene_number(self):
+        return len(array(self.genome))
+
+        
 
