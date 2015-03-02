@@ -20,6 +20,24 @@
 \usepackage{pgfplots}        
 \usepackage{pgfplotstable}
 \usepgfplotslibrary{dateplot}
+\usepackage{pgfplots}
+
+\definecolor{Gene0}{RGB}{250, 164, 1}
+\definecolor{Gene1}{RGB}{128, 0, 128}
+\definecolor{Gene2}{RGB}{255, 0, 0}
+\definecolor{Gene3}{RGB}{58, 242, 75}
+\definecolor{Gene4}{RGB}{8, 81, 156}
+\definecolor{Diversity}{RGB}{0, 0, 0}
+
+\pgfplotscreateplotcyclelist{list}{
+{Gene0},
+{Gene1},
+{Gene2},
+{Gene3},
+{Gene4},
+{Diversity}
+}
+
 
 
 \newcommand{\statsfile}{stats.csv}
@@ -64,13 +82,44 @@
 	\paragraph*{}
 	The aim of this project is to implement a genetic algorithm which will bring out the connexions between different genes, their regulation networks, and some properties linked to, as well as their resistance to genes knock-out (KO).
 	\paragraph*{}
-	We will study a famous genes network example, which has been highlighted by Wagner. Wagner's genes network is an artificial genes network calculation model. It has explained all the development and evolution process of genetic regulation networks. It has been first developed by Andreas Wgener in 1996, and then used by several research teams in order to study genes network evolution, genes expression, etc.
+	We will study a famous genes network example, which has been highlighted by Wagner. Wagner's genes network is an artificial genes network calculation model. It has explained all the development and evolution process of genetic regulation networks. It has been first developed by Andreas Wagner in 1996, and then used by several research teams in order to study genes network evolution, genes expression, etc.
 	\paragraph*{}
-	We will simulate \textit{in silico} a population's evolution over a lot of generations. Each individual is caracterized by his genotype (that is to say, his genes networks), and a phenotype, which corresponds to this genes network's expression. The individuals will be submit to an evolutive process by the intermediary of their genes network.
+	We will simulate \textit{in silico} a population's evolution over a lot of generations. Each individual is characterized by his genotype (that is to say, his genes networks), and a phenotype, which corresponds to this genes network's expression. The individuals will be submit to an evolutive process by the intermediary of their genes network.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
-\section*{results through graphics}
+\section*{Results through graphics}
+    \subsection*{Exploitation of the default parameters}
+    \paragraph*{}
+    \begin{figure}[h!] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {200x300x1.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {200x300x1.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {200x300x1.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {200x300x1.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {200x300x1.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-1}$}
+      \label{fig:200x300x1}
+    \end{figure}
+    \paragraph*{}
+   
+
+
+    \subsection*{}
     \paragraph*{}
     \begin{figure}[h!] 
       \centering
@@ -83,6 +132,7 @@
                   ,axis lines=left
                   ,ymajorgrids
                   ,legend style={legend pos=south east}
+                  ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {150x100x6.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {150x100x6.csv};
@@ -109,6 +159,7 @@
                   ,axis lines=left
                   ,ymajorgrids
                   ,legend style={legend pos=south east}
+                  ,cycle list name=list
               ]
               %pop_size,gene_number,generation_number,viability_ratio_0,viability_ratio_1,viability_ratio_2,viability_ratio_3,viability_ratio_4
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {300x100x4.csv};
@@ -136,6 +187,7 @@
                   ,axis lines=left
                   ,ymajorgrids
                   ,legend style={legend pos=south east}
+                  ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratioDB0] {300x100x4.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratioDB1] {300x100x4.csv};
@@ -162,6 +214,7 @@
                   ,axis lines=left
                   ,ymajorgrids
                   ,legend style={legend pos=south east}
+                  ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratioDB0] {300x100x2.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratioDB1] {300x100x2.csv};
