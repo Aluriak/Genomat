@@ -8,7 +8,16 @@ test_computation:
 	python3 -m genomat --mutation_rate=0.1 --pop_size=10 --generations=60 $(OPTIONS) $(STATS)
 
 computation:
-	python3 -m genomat --mutation_rate=0.000001 --pop_size=100 --generations=150 $(OPTIONS) $(STATS)
+	python3 -m genomat --generations=300 --pop_size=100 --mutation_rate=0.1 $(OPTIONS) $(STATS)
+	mv data/stats.csv doc/300x100x1.csv
+	python3 -m genomat --generations=300 --pop_size=100 --mutation_rate=0.01 $(OPTIONS) $(STATS)
+	mv data/stats.csv doc/300x100x2.csv
+	python3 -m genomat --generations=300 --pop_size=100 --mutation_rate=0.0001 $(OPTIONS) $(STATS)
+	mv data/stats.csv doc/300x100x4.csv
+	python3 -m genomat --generations=300 --pop_size=100 --mutation_rate=0.000001 $(OPTIONS) $(STATS)
+	mv data/stats.csv doc/300x100x6.csv
+	python3 -m genomat --generations=150 --pop_size=100 --mutation_rate=0.000001 $(OPTIONS) $(STATS)
+	mv data/stats.csv doc/150x100x6.csv
 
 do_config:
 	python3 -m genomat --save_config
