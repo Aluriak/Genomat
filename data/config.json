@@ -2,7 +2,6 @@
     "help":0,
     "erase_previous_stats":0,
     "do_stats":0,
-    "use_db_in_stats":0,
     "mutation_rate":0.01,
     "parent_number":2,
     "initial_phenotype":[
@@ -21,6 +20,6 @@
     "config_file":"data/config.json",
     "wideness_gene":100,
     "stats_file":"data/stats.csv",
-    "save_config":1,
+    "save_config":0,
     "pop_size":20
 }
