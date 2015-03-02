@@ -1,7 +1,6 @@
 {
     "generations":[
-        10,
-        100
+        10
     ],
     "save_config":1,
     "pop_size":20,
