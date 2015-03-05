@@ -20,7 +20,7 @@ import csv
 import math
 from functools   import partial
 from collections import defaultdict
-from genomat.config import STATS_FILE, GENE_NUMBER
+from genomat.config import STATS_FILE, GENE_NUMBER, SAVE_NETWORKS, NETWORKS_FILE
 import numpy as np
 
 
@@ -28,9 +28,10 @@ import numpy as np
 #########################
 # PRE-DECLARATIONS      #
 #########################
-stats_file = None
-writer     = None
-ratio_data = defaultdict(list)
+stats_file      = None
+networks_file   = None
+writer          = None
+ratio_data      = defaultdict(list)
 
 
 
@@ -50,6 +51,8 @@ def initialize(configuration):
     # print header if no previous stats
     if configuration['erase_previous_stats']:
         writer.writeheader()
+    if configuration[SAVE_NETWORKS]:
+        networks_file = open(configuration[NETWORKS_FILE], 'w')
 
 
 
@@ -63,13 +66,21 @@ def update(population, generation_number):
     ratios    = [population.test_genes([gene])[1] for gene in range(gene_number)]
     ratios_db = [ratio2dB(r, population.size) for r in ratios]
     [ratio_data[gene].append(r) for gene, r in enumerate(ratios_db)]
-    diversity = population.genotype_count / population.size
-    #printed = set()
-    #for indiv in population.indivs:
-        #if indiv not in printed:
+    genotypes = population.genotypes
+    diversity = (len(genotypes)-1) / population.size
+    if configuration[SAVE_NETWORKS]:
+        networks_file.write('\n==========================\n')
+        networks_file.write('\n'.join(str(_) for _ in genotypes))
+        #print('---------')
+        #for indiv in population.indivs:
             #print(indiv)
-            #printed.add(indiv)
-    #print('DIVERSITY:', diversity)
+        #print('---------')
+        #for indiv in genotypes:
+            #for indiv2 in genotypes:
+                #print(indiv)
+                #print(indiv2)
+                #print(indiv2 == indiv, '\n----------\n')
+        networks_file.write('DIVERSITY:', diversity)
     # get values and write them in file
     writer.writerow(stats_file_values(
         population.size,
@@ -89,6 +100,8 @@ def finalize():
     stats_file.close()
     stats_file = None
     #save_fft(ratio_data)
+    if configuration[SAVE_NETWORKS]:
+        networks_file.close()
 
 
 

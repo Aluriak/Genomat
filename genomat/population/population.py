@@ -168,9 +168,13 @@ class Population:
         return len(self.indivs)
 
     @property
-    def genotype_count(self):
-        """return integer equal to number of different genotype in population"""
-        return len(set(self.indivs))
+    def genotypes(self):
+        """return all differents geneNetwork in population"""
+        genotypes = []
+        for genenet in self.indivs:
+            if not any(genenet == i for i in genotypes):
+                genotypes.append(genenet)
+        return genotypes
 
 
 
