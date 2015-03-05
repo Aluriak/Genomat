@@ -93,14 +93,14 @@ def update(population, generation_number):
 
 
 
-def finalize():
+def finalize(population):
     """Close files"""
     global stats_file, ratio_data
     if stats_file is None: return # case where no initialize was called
     stats_file.close()
     stats_file = None
     #save_fft(ratio_data)
-    if configuration[SAVE_NETWORKS]:
+    if population.configuration[SAVE_NETWORKS]:
         networks_file.close()
 
 
