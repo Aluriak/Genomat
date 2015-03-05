@@ -120,36 +120,6 @@
                   ,legend style={legend pos=south east}
                   ,cycle list name=list
               ]
-              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {test.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {test.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {test.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {test.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {test.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=diversity]       {test.csv};
-              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
-          \end{axis}
-      \end{tikzpicture}
-      \caption{TEST}
-      \label{fig:200x300x1}
-    \end{figure}
-    \paragraph*{}
-   
-
-
-    \paragraph*{}
-    \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
-                  %,no mark % retract marks at point location
-                  ,xlabel={Generations}
-                  ,ylabel={Survivability ratio}
-                  ,grid=major % grid on all axis
-                  ,axis lines=left
-                  ,ymajorgrids
-                  ,legend style={legend pos=south east}
-                  ,cycle list name=list
-              ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {200x300x1.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {200x300x1.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {200x300x1.csv};
