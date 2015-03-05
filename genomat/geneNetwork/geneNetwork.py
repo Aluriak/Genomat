@@ -186,14 +186,15 @@ class GeneNetwork():
     def __str__(self):
         return str(self.genome)
 
-    def __equ__(self, othr):
+    def __eq__(self, othr):
         """Two genes network are equal when have the same gene number 
         and have exactly the same regulation coefficient.
         EPSILON value is used for estimate equality of coefficients."""
-        return self.gene_number is othr.gene_number and all(
+        if self.gene_number != othr.gene_number: return False
+        return self.gene_number == othr.gene_number and all(
             abs(self_val - othr_val) < EPSILON
+            for self_gene_vals, othr_gene_vals in zip(array(self.genome), array(othr.genome))
             for self_val, othr_val in zip(self_gene_vals, othr_gene_vals)
-            for self_gene_vals, othr_gene_vals in zip(array(self), array(othr))
         )
 
     @property
