@@ -34,6 +34,8 @@ RANDOM_GENE_VAL_FUNC= 'random_gene_val_func'
 MUTATED_FUNC        = 'mutated_func'
 WIDENESS_GENE       = 'wideness_gene'
 WIDENESS_MUT        = 'wideness_mut'
+SAVE_NETWORKS       = 'save_networks'
+NETWORKS_FILE       = 'networks_file'
 # use theses keys
 default_configuration = {
     POP_SIZE:               20,
@@ -46,6 +48,8 @@ default_configuration = {
     STATS_FILE:             'data/stats.csv',
     WIDENESS_GENE:          100,
     WIDENESS_MUT:           10,
+    SAVE_NETWORKS:          False,
+    NETWORKS_FILE:          'data/networks.txt',
 }
 
 
