@@ -167,7 +167,7 @@ def prettify(configuration, prefix=''):
         prefix+'parent count     :\t': configuration[PARENT_COUNT],
         prefix+'gene wideness    :\t': configuration[WIDENESS_GENE],
         prefix+'mutation wideness:\t': configuration[WIDENESS_MUT],
-        prefix+'perform stats    :\t': 'yes' if configuration[DO_STATS] else 'no',
+        prefix+'perform stats    :\t': ('yes ['+configuration[STATS_FILE]+']') if configuration[DO_STATS] else 'no',
     }
     return (
         '\n'.join((k + str(v) for k, v in to_print.items()))
