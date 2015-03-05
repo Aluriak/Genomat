@@ -9,23 +9,23 @@ Usage:
     __main__.py [options] 
 
 Options:
-    -v --version            show version
-    -h --help               show this docstring                         
-    --pop_size=<COUNT>      size of populations                         
+    -v --version                            show version
+    -h --help                               show this docstring                         
+    --pop_size=<COUNT>                      size of populations                         
     --generations=<COUNT>[(,<COUNT>)]...    number of generations computed 
-    --gene_number=<COUNT>   number of gene in a network                 
+    --gene_number=<COUNT>                   number of gene in a network                 
     --initial_phenotype=<COUNT>[(,<COUNT>)]...  phenotype used as first phenotype 
-    --mutation_rate=<RATE>  rate of mutation (float in [0;1])           
-    --parent_number=<COUNT> number of parents for give a new individual 
-    --save_config           save config as                              
-    --config_file=<FILE>    path to config file in json format [default: data/config.json]
-    --do_stats              save stats about each step in stats file    
-    --stats_file=<FILE>     save stats in FILE                           
-    --erase_previous_stats  delete previous stats data in stats file   
-    --wideness_gene=<COUNT> wideness of normal law used create 1st generation
-    --wideness_mut=<COUNT>  wideness of normal law used in case of mutation
-    --save_networks         dump all matrices in NETWORKS_FILE at each generation
-    --networks_file         file that receive dump of matrices
+    --mutation_rate=<RATE>                  rate of mutation (float in [0;1])           
+    --parent_number=<COUNT>                 number of parents for give a new individual 
+    --save_config                           save config as                              
+    --config_file=<FILE>                    path to config file in json format [default: data/config.json]
+    --do_stats                              save stats about each step in stats file    
+    --stats_file=<FILE>                     save stats in FILE                           
+    --erase_previous_stats                  delete previous stats data in stats file   
+    --wideness_gene=<COUNT>                 wideness of normal law used create 1st generation
+    --wideness_mut=<COUNT>                  wideness of normal law used in case of mutation
+    --save_networks                         dump all matrices in NETWORKS_FILE at each generation
+    --networks_file                         file that receive dump of matrices
 
 """
 
