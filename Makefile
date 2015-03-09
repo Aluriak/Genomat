@@ -46,6 +46,6 @@ verif:
 	pylint genomat/__main__.py
 
 uml: 
-	pyreverse  -AS -o png genomat -p genomat
+	pyreverse -o png genomat -p genomat
 	mkdir -p doc/diagrams
 	mv packages_* classes_* doc/diagrams/
