@@ -91,6 +91,8 @@ class GeneNetwork():
             >>> from numpy import matrix, array
             >>> from genomat.geneNetwork import GeneNetwork
             >>> gn = GeneNetwork(nmatrix=matrix('1,2,3;4,5,6;7,8,9'))
+            >>> gn.gene_number
+            3
             >>> gn.deactivate_genes([1])
             >>> str(gn)
             '[[1 0 3]\n [0 0 0]\n [7 0 9]]'
