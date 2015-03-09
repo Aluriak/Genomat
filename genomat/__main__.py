@@ -21,11 +21,13 @@ Options:
     --config_file=<FILE>                    path to config file in json format [default: data/config.json]
     --do_stats                              save stats about each step in stats file    
     --stats_file=<FILE>                     save stats in FILE                           
-    --erase_previous_stats                  delete previous stats data in stats file   
+    --erase_previous_stats                  delete previous stats data in stats file   [default: True]
     --wideness_gene=<COUNT>                 wideness of normal law used create 1st generation
     --wideness_mut=<COUNT>                  wideness of normal law used in case of mutation
     --save_networks                         dump all matrices in NETWORKS_FILE at each generation
-    --networks_file                         file that receive dump of matrices
+    --networks_file=<FILE>                  file that receive dump of matrices
+    --save_profiles                         do profiles at each generation on all individuals
+    --profiles_file=<FILE>                  file that receive profiles data
 
 """
 
@@ -82,9 +84,8 @@ if __name__ is '__main__':
     # save it if asked
     if configuration['save_config']:
         config.save(dict(configuration), filename=configuration[config.CONFIG_FILE])
-    # do stats if asked
-    if configuration[config.DO_STATS]:
-        stats.initialize(configuration)
+    # do stats
+    stats.initialize(configuration)
 
     # print used configuration
     print('USED CONFIGURATION IS:\n', config.prettify(configuration, '\t'), "\n---------------\n", sep='')
@@ -113,8 +114,7 @@ if __name__ is '__main__':
     
 
     # finalize all
-    if configuration[config.DO_STATS]:
-        stats.finalize(pop)
+    stats.finalize(pop)
 
 
 

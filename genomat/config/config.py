@@ -36,6 +36,8 @@ WIDENESS_GENE       = 'wideness_gene'
 WIDENESS_MUT        = 'wideness_mut'
 SAVE_NETWORKS       = 'save_networks'
 NETWORKS_FILE       = 'networks_file'
+SAVE_PROFILES       = 'save_profiles'
+PROFILES_FILE       = 'profiles_file'
 # use theses keys
 default_configuration = {
     POP_SIZE:               20,
@@ -50,6 +52,8 @@ default_configuration = {
     WIDENESS_MUT:           10,
     SAVE_NETWORKS:          False,
     NETWORKS_FILE:          'data/networks.txt',
+    SAVE_PROFILES:          False,
+    PROFILES_FILE:          'data/profiles.csv',
 }
 
 
@@ -158,16 +162,13 @@ def prettify(configuration, prefix=''):
     """Return str vision of configuration, ready to be print"""
     to_print = {
         prefix+'gene number      :\t': configuration[GENE_NUMBER],
-        #prefix+'pop size         :\t': configuration[POP_SIZE],
         prefix+'init phenotype   :\n': configuration[INITIAL_PHENOTYPE],
         prefix+'mutation rate    :\t': configuration[MUTATION_RATE],
-        #prefix+'generations      :\t': ','.join(
-            #str(_) for _ in configuration[GENERATION_COUNTS]
-        #),
         prefix+'parent count     :\t': configuration[PARENT_COUNT],
         prefix+'gene wideness    :\t': configuration[WIDENESS_GENE],
         prefix+'mutation wideness:\t': configuration[WIDENESS_MUT],
         prefix+'perform stats    :\t': ('yes ['+configuration[STATS_FILE]+']') if configuration[DO_STATS] else 'no',
+        prefix+'perform profiles :\t': ('yes ['+configuration[PROFILES_FILE]+']') if configuration[SAVE_PROFILES] else 'no',
     }
     return (
         '\n'.join((k + str(v) for k, v in to_print.items()))

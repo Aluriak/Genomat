@@ -7,15 +7,18 @@
 import concurrent.futures
 import random
 
+from numpy               import matrix, array, array_equal
+from statistics          import mean, variance
+from collections         import defaultdict
+
+
 import genomat.config as config
 import genomat.stats  as stats
 
-from numpy               import matrix, array, array_equal
 from genomat.geneNetwork import GeneNetwork
 from genomat.config      import POP_SIZE, MUTATION_RATE, GENE_NUMBER
 from genomat.config      import PARENT_COUNT, INITIAL_PHENOTYPE, DO_STATS, STATS_FILE
 from genomat.progressbar import create_progress_bar, update_progress_bar, finish_progress_bar
-
 
 
 #########################
@@ -162,7 +165,6 @@ class Population:
                + '\n'.join((str(i) for i in self.indivs))
               )
 
-
     @property
     def size(self):
         return len(self.indivs)
@@ -175,6 +177,29 @@ class Population:
             if not any(genenet == i for i in genotypes):
                 genotypes.append(genenet)
         return genotypes
+
+    @property
+    def profiles(self):
+        """Return a tuple of two numpy matrices, 
+        that contains means and standard variance 
+        of each individual in population"""
+        summed_values = defaultdict(list)
+        nb_gene = self.indivs[0].gene_number
+        
+        # sum all values of each gene of each individual
+        for genome in (array(_.genome) for _ in self.indivs):
+            for gene in range(nb_gene):
+                values = array(genome[gene])
+                for col in range(len(values)):
+                    summed_values[gene, col].append(values[col])
+
+        # get means and std deviation
+        means = {k:mean(v) for k, v in summed_values.items()}
+        varis = {k:variance(v, means[k]) for k, v in summed_values.items()}
+        return means, varis
+        
+
+
 
 
 
