@@ -8,11 +8,10 @@ test_computation:
 
 #parameters given by needed for the report
 computation:
-    python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.01 --stats_file="doc/ps300xg200xmr1-10-2.csv" $(OPTION) $(STATS)
-	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.01 $(PHENO_ALT) --stats_file="doc/ps300xg200xmr1-10-2xmpmpm.csv" $(STATS)
-	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.001 --stats_file="doc/ps300xg200xmr1-10-3.csv" $(OPTION) $(STATS)
-	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.0001 --stats_file="doc/ps300xg200xmr1-10-4.csv" $(OPTION) $(STATS)
-
+	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.01	--stats_file="doc/ps300xg200xmr1-10-2.csv" $(OPTION) $(STATS)
+	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.01	--stats_file="doc/ps300xg200xmr1-10-2xmpmpm.csv" $(STATS) $(PHENO_ALT)
+	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.001	--stats_file="doc/ps300xg200xmr1-10-3.csv" $(OPTION) $(STATS)
+	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.0001	--stats_file="doc/ps300xg200xmr1-10-4.csv" $(OPTION) $(STATS)
 	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.1		--stats_file="doc/ps300xg200xmr1-10-1.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.01	--stats_file="doc/ps300xg200xmr1-10-2.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat --generations=200 --pop_size=300 --mutation_rate=0.0001	--stats_file="doc/ps300xg200xmr1-10-4.csv" $(OPTIONS) $(STATS)
