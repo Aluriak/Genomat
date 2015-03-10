@@ -1,7 +1,8 @@
 OPTIONS=
 POP_DEFAULT=--generations=200 --pop_size=300 
 STATS=--erase_previous_stats --do_stats --save_profiles
-PHENO_ALT=--initial_phenotype=-1,1,-1,1,-1
+PHENO_ALT1=--initial_phenotype=-1,1,-1,1,-1
+PHENO_ALT1=--initial_phenotype=1,-1,1,-1,1
 SEED=--seed=4223 
 
 	
