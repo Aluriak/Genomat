@@ -204,6 +204,8 @@ class Population:
         # get means and std deviation
         means = {k:mean(v) for k, v in summed_values.items()}
         varis = {k:variance(v, means[k]) for k, v in summed_values.items()}
+        assert(all(v is not None for v in means.keys()))
+        assert(all(v is not None for v in varis.keys()))
         return means, varis
         
 
