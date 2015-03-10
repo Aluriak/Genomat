@@ -31,22 +31,21 @@
 \definecolor{Diversity}{RGB}{0, 0, 0}
 
 \pgfplotscreateplotcyclelist{list}{
-{Gene0},
-{Gene1},
-{Gene2},
-{Gene3},
-{Gene4},
-{Diversity}
+        {Gene0},
+        {Gene1},
+        {Gene2},
+        {Gene3},
+        {Gene4},
+        {Diversity}
 }
-
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % PRÉAMBULE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\title{} 
-\author{}
+\title{Genomat\\PRJ project Report}
+\author{Ostiane D'AUGUSTIN and Lucas BOURNEUF}
 % laisser vide pour date de compilation
 \date{} 
 
@@ -67,8 +66,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % BEGIN                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Report of our PRJ project}
-\author{Ostiane D'AUGUSTIN and Lucas BOURNEUF}
 \begin{document}
         \maketitle % page de titre
 
@@ -80,11 +77,68 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Introduction}
 	\paragraph*{}
-	The aim of this project is to implement a genetic algorithm which will bring out the connexions between different genes, their regulation networks, and some properties linked to, as well as their resistance to genes knock-out (KO).
+	The aim of this project is to implement a genetic algorithm which will bring out the connexions between different genes, 
+        their regulation networks, and some properties linked to, as well as their resistance to genes knock-out (KO).
 	\paragraph*{}
-	We will study a famous genes network example, which has been highlighted by Wagner. Wagner's genes network is an artificial genes network calculation model. It has explained all the development and evolution process of genetic regulation networks. It has been first developed by Andreas Wagner in 1996, and then used by several research teams in order to study genes network evolution, genes expression, etc.
+	We will study a famous genes network example, which has been highlighted by Wagner. Wagner's genes network is an artificial genes network calculation model. 
+        It has explained all the development and evolution process of genetic regulation networks. It has been first developed by Andreas Wagner in 1996, 
+        and then used by several research teams in order to study genes network evolution, genes expression, etc.
 	\paragraph*{}
-	We will simulate \textit{in silico} a population's evolution over a lot of generations. Each individual is characterized by his genotype (that is to say, his genes networks), and a phenotype, which corresponds to this genes network's expression. The individuals will be submit to an evolutive process by the intermediary of their genes network.
+	We will simulate \textit{in silico} a population's evolution over many generations. Each individual is characterized by his genotype 
+        (that is to say, its genes network). 
+        Individuals will be submit to an evolutive process by the intermediary of their genes networks.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION               %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Project organization}
+	\paragraph*{}
+        The project follows a Python-like packaging, with the main program launchable as a package. (\textit{python -m genomat})
+        Many parameters can be sended through command-line arguments, or configuration file.
+        Outputs are mainly in \textsc{csv format}. (notabily those provided for statistics)
+
+	\paragraph*{}
+        A second and incomplete implementation of Genomat is available under the name of \textit{genomat\_func}. 
+        This implementation is only here as a proof of concept that use a functionnal approach.
+
+	\paragraph*{}
+        Used technologies :
+        \begin{description}
+                \item[python] as the main language (version 3.4);
+                \item[docopt] as command-line arguments parser;
+                \item[doctest] for unit tests in some docstrings (see \textsc{unittests.py} file);
+                \item[numpy] for manage matrix (and notabily multiplications) until Python 3.5 interpreter is available;
+                \item[latex] for present report, with pgfplot module for automatic data vizualization generation;
+                \item[pylint] for source code profiling and UML generation;
+                \item[make] for automatize simulations, tests, etc;
+        \end{description}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION               %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Source code architecture}
+	\paragraph*{}
+        Genomat is cut in modules as shown in Figure~\ref{fig:umldiag}, and described below.
+        \begin{description}
+                \item[main] implements a simple and efficient interface that allow command-line arguments;
+                \item[config] management of configurations : files, options, flags, serialization;
+                \item[gene network] definition of an individual, encapsulation of numpy matrix system;
+                \item[population] a list of individuals that provides many data access and call stats modules as an observer;
+                \item[stats] observer of population that tests it and generate, if asked, data in targeted files;
+                \item[progress bar] dumb and simple implementation of a progress bar, designed to be replaced later;
+        \end{description}
+
+        \begin{figure}[H] 
+                \centering
+                \includegraphics[width=\textwidth]{packages_genomat.png}
+                \caption{Modules of Genomat architecture, without externals ones (numpy, docopt).}
+                \label{fig:umldiag}
+        \end{figure}
 
 
 
@@ -96,11 +150,13 @@
     \paragraph*{}
     Main data generated results of gene KO, for each gene at each generation. 
     A diversity ratio is also computed at each generation.
-
     \paragraph*{}
-     First, we tested our program with the parameters given by the subject, that is to say 200 generations with 300 individuals per generation. As there was no mutation rate given, we varied it from $10^{-1}$ (that is to say, a mutation rate of 1) to $10^{-6}$. We will then study the influence of the mutation rate on a random population of 300 individuals over 200 generations.
+     First, we tested our program with the parameters given by the subject, that is to say 200 generations with 300 individuals per generation. 
+     As there was no mutation rate given, we varied it from $10^{-1}$ (that is to say, a mutation rate of 1) to $10^{-6}$. 
+     We will then study the influence of the mutation rate on a random population of 300 individuals over 200 generations.
     \paragraph*{}
-     With those parameters, we can notice the five genes have a similar course : their survivability ratio first fastly increase from 0.7 during the fifty first generations. After this exponentianal phase, the survavibility ratio reach a plateau about 1. 
+     With those parameters, we can notice the five genes have a similar course : their survivability ratio first fastly 
+     increase from 0.7 during the fifty first generations. After this exponentianal phase, the survavibility ratio reach a plateau about 1. 
 
 
 
@@ -129,7 +185,8 @@
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps200xg300xmr1-10-1.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps200xg300xmr1-10-1.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps200xg300xmr1-10-1.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=diversity]       {ps200xg300xmr1-10-1.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps200xg300xmr1-10-1.csv};
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
@@ -138,8 +195,11 @@
     \end{figure}
     \paragraph*{}
     We can notice that during the fifty first generations, the resistance to gene KO survivability ratio is still incresing from 0.7 to near to 1, and then, it reach to plateau. This shows that there is no gene wich is absolutly essential for the individual survivability. As a result, the diversity is very close to 1.
+
     
     
+    \paragraph*{}
+    Coucou ceci est un test !
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}

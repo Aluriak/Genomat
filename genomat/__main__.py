@@ -41,7 +41,6 @@ from docopt             import docopt
 from numpy              import matrix
 import genomat.config as config 
 import genomat.stats  as stats
-import csv
 
 
 
