@@ -7,7 +7,7 @@ SEED=--seed=4223
 
 	
 test_computation:
-	python3 -m genomat $(SEED) $(POP_DEFAULT) --mutation_rate=0.00001 --profiles_file="doc/test_p.csv" --stats_file="doc/test.csv" $(OPTIONS) $(STATS)
+	python3 -m genomat --generations=10 --pop_size=10 --mutation_rate=0.00001 --profiles_file="data/test_p.csv" --stats_file="data/test.csv" $(OPTIONS) --erase_previous_stats --do_stats --save_profiles --save_networks
 
 ###############################################################################
 # PROJECT TEST CASES
