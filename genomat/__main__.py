@@ -17,6 +17,7 @@ Options:
     --initial_phenotype=<COUNT>[(,<COUNT>)]...  phenotype used as first phenotype 
     --mutation_rate=<RATE>                  rate of mutation (float in [0;1])           
     --parent_number=<COUNT>                 number of parents for give a new individual 
+    --seed=<COUNT>                          seed value, useful for provide results reproductibility
     --save_config                           save config as                              
     --config_file=<FILE>                    path to config file in json format [default: data/config.json]
     --do_stats                              save stats about each step in stats file    
@@ -41,6 +42,7 @@ from docopt             import docopt
 from numpy              import matrix
 import genomat.config as config 
 import genomat.stats  as stats
+import random
 
 
 
@@ -80,6 +82,9 @@ if __name__ is '__main__':
     # merge configs as configuration
     configuration = ChainMap({}, config_args, config_file)
 
+    # initialize seed if needed
+    if configuration[config.SEED_VALUE] is not None:
+        random.seed(configuration[config.SEED_VALUE])
     # save it if asked
     if configuration['save_config']:
         config.save(dict(configuration), filename=configuration[config.CONFIG_FILE])
