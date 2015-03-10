@@ -84,7 +84,7 @@
         It has explained all the development and evolution process of genetic regulation networks. It has been first developed by Andreas Wagner in 1996, 
         and then used by several research teams in order to study genes network evolution, genes expression, etc.
 	\paragraph*{}
-	We will simulate \textit{in silico} a population's evolution over many generations. Each individual is characterized by his genotype 
+	We will simulate \textit{in silico} a population's evolution over many generations. Each individual is caracterized by his genotype 
         (that is to say, its genes network). 
         Individuals will be submit to an evolutive process by the intermediary of their genes networks.
 
@@ -151,9 +151,10 @@
     Main data generated results of gene KO, for each gene at each generation. 
     A diversity ratio is also computed at each generation.
     \paragraph*{}
-     First, we tested our program with the parameters given by the subject, that is to say 200 generations with 300 individuals per generation. 
-     As there was no mutation rate given, we varied it from $10^{-1}$ (that is to say, a mutation rate of 1) to $10^{-6}$. 
-     We will then study the influence of the mutation rate on a random population of 300 individuals over 200 generations.
+     First, as there was no mutation rate given, exploited simulations use a mutation rate from $10^{-0}$ to $10^{-6}$, 
+     with a constant population size of 300 individuals and 200 generations.\\
+     For each gene, the survavibility ratio is computed. The survivability ratio is defined as $S_{g} = \frac{KO_g}{population_{size}}$ 
+     with $KO_g$ as the number of individuals still viable after the KO of gene g.
     \paragraph*{}
      With those parameters, we can notice the five genes have a similar course : their survivability ratio first fastly 
      increase from 0.7 during the fifty first generations. After this exponentianal phase, the survavibility ratio reach a plateau about 1. 
@@ -180,6 +181,38 @@
                   ,legend style={legend pos=south east}
                   ,cycle list name=list
               ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps200xg300xmr1-10-0.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps200xg300xmr1-10-0.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps200xg300xmr1-10-0.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps200xg300xmr1-10-0.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps200xg300xmr1-10-0.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps200xg300xmr1-10-0.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 1}
+      \label{fig:ps200xg300xmr1-10-0}
+    \end{figure}
+    \paragraph*{}
+    Expectedly, with a mutation rate, diversity never decrease and stay at 1. Because of amplitude of genes regulation values (100), its seems improbable to 
+    keep the same values from its parents.
+
+
+    \paragraph*{}
+    \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps200xg300xmr1-10-1.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps200xg300xmr1-10-1.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps200xg300xmr1-10-1.csv};
@@ -190,16 +223,17 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 1
-      \label{fig:ps200xg300xmr1-10-2.csv}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 0.1}
+      \label{fig:ps200xg300xmr1-10-1}
     \end{figure}
     \paragraph*{}
-    We can notice that during the fifty first generations, the resistance to gene KO survivability ratio is still incresing from 0.7 to near to 1, and then, it reach to plateau. This shows that there is no gene wich is absolutly essential for the individual survivability. As a result, the diversity is very close to 1.
+    We can notice that during the fifty first generations, the resistance to gene KO survivability ratio is still 
+    increasing from 0.7 to near to 1, and then, it reach to plateau. This shows that there is no gene wich is 
+    absolutly essential for the individual survivability. As a result, the diversity is very close to 1.
 
     
     
     \paragraph*{}
-    Coucou ceci est un test !
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}
@@ -222,11 +256,14 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-1}$}
-      \label{fig:ps200xg300xmr1-10-2.csv}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-2}$}
+      \label{fig:ps200xg300xmr1-10-2}
     \end{figure}
     \paragraph*{}
-    In this second graph, the diversity is still very close to 1. However, we can notice that the resistance to gene KO doesn't have the same conduct : gene 0 resistance to gene KO increases very fastly to 1 (about 20 generations), whereas gene 3 has a pretty bad resistance to gene KO, moreover compared to the other genes. For example, since the 120th generation to the  150th one, the resistance to gene 3 KO ration survivability steaily decrease from 0.95 to less than 0.8. This shows that the gene 3 is pretty essential to an individual's survivability.
+    In this second graph, the diversity is still very close to 1. However, we can notice that the resistance to gene KO doesn't have the same conduct : 
+    gene 0 resistance to gene KO increases very fastly to 1 (about 20 generations), whereas gene 3 has a pretty bad resistance to gene KO, 
+    moreover compared to the other genes. For example, since the 120th generation to the  150th one, the resistance to gene 3 KO ration 
+    survivability steaily decrease from 0.95 to less than 0.8. This shows that the gene 3 is pretty essential to an individual's survivability.
  
 
     \begin{figure}[H] 
@@ -251,11 +288,13 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-2}$}
-      \label{fig:ps200xg300xmr1-10-3.csv}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-3}$}
+      \label{fig:ps200xg300xmr1-10-3}
     \end{figure}
     \paragraph*{}
-    In this third graph, the diversity is still very close to 1, but, contrary to the two first graph, it is not a constant, and we can see little variations. However, the resistance to gene KO survivability ratio is very similar to the first one, then we won't develop any more.
+    In this third graph, the diversity is still very close to 1, but, contrary to the two first graph, it is not a constant, 
+    and we can see little variations. 
+    However, the resistance to gene KO survivability ratio is very similar to the first one, then we won't develop any more.
     
 
     \begin{figure}[H] 
@@ -280,11 +319,12 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-3}$}
-      \label{fig:ps200xg300xmr1-10-4.csv}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$}
+      \label{fig:ps200xg300xmr1-10-4}
     \end{figure}
-    \paragraph*{}
 
+
+    \paragraph*{}
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}
@@ -307,8 +347,8 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$}
-      \label{fig:ps200xg300xmr1-10-5.csv}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-5}$}
+      \label{fig:ps200xg300xmr1-10-5}
     \end{figure}
     \paragraph*{}
     
@@ -334,8 +374,8 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-5}$}
-      \label{fig:ps200xg300xmr1-10-6.csv}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-6}$}
+      \label{fig:ps200xg300xmr1-10-6}
     \end{figure}
     \paragraph*{}
 
