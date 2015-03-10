@@ -1,7 +1,8 @@
 OPTIONS=
 POP_DEFAULT=--generations=200 --pop_size=300 
 STATS=--erase_previous_stats --do_stats --save_profiles --save_networks
-PHENO_ALT=--initial_phenotype=-1,1,-1,1,-1
+PHENO_ALT1=--initial_phenotype=-1,1,-1,1,-1
+PHENO_ALT1=--initial_phenotype=1,-1,1,-1,1
 
 	
 test_computation:
@@ -15,7 +16,7 @@ computation:
 	python3 -m genomat $(POP_DEFAULT) --mutation_rate=1		--stats_file="doc/ps300xg200xmr1-10-0.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.1		--stats_file="doc/ps300xg200xmr1-10-1.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.01		--stats_file="doc/ps300xg200xmr1-10-2.csv" $(OPTIONS) $(STATS)
-	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.01		--stats_file="doc/ps300xg200xmr1-10-2xmpmpm.csv" $(STATS) $(PHENO_ALT)
+	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.01		--stats_file="doc/ps300xg200xmr1-10-2xalt1.csv" $(STATS) $(PHENO_ALT1)
 	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.001		--stats_file="doc/ps300xg200xmr1-10-3.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.0001	--stats_file="doc/ps300xg200xmr1-10-4.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat $(POP_DEFAULT) --mutation_rate=0.000001	--stats_file="doc/ps300xg200xmr1-10-6.csv" $(OPTIONS) $(STATS)
