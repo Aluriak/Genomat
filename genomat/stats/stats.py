@@ -149,7 +149,7 @@ def profiles_file_keys(gene_number):
         'mean'+str(gene)+'x'+str(col) 
         for gene, col in product(range(gene_number), repeat=2)
     ] + [
-        'stdev'+str(gene)+'x'+str(col) 
+        'varc'+str(gene)+'x'+str(col) 
         for gene, col in product(range(gene_number), repeat=2)
     ]
 
@@ -173,11 +173,11 @@ def stats_file_values(pop_size, gene_number, generation_number, diversity, viabi
 
 def profiles_file_values(profiles, generation_number):
     """Return a dict usable with csv.DictWriter for profiles file"""
-    means, stdev = profiles
+    means, varc = profiles
     means = {'mean' +str(k[0])+'x'+str(k[1]): v for k,v in means.items()}
-    stdev = {'stdev'+str(k[0])+'x'+str(k[1]): v for k,v in stdev.items()}
+    varc  = {'varc'+str(k[0])+'x'+str(k[1]): v for k,v in stdev.items()}
     # return all
-    means.update(stdev)
+    means.update(varc)
     means['generation'] = generation_number
     return means
 
