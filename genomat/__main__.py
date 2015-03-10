@@ -22,7 +22,7 @@ Options:
     --config_file=<FILE>                    path to config file in json format [default: data/config.json]
     --do_stats                              save stats about each step in stats file    
     --stats_file=<FILE>                     save stats in FILE                           
-    --erase_previous_stats                  delete previous stats data in stats file   [default: True]
+    --erase_previous_stats                  delete previous stats data in stats file
     --wideness_gene=<COUNT>                 wideness of normal law used create 1st generation
     --wideness_mut=<COUNT>                  wideness of normal law used in case of mutation
     --save_networks                         dump all matrices in NETWORKS_FILE at each generation
