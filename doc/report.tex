@@ -199,7 +199,6 @@
     
     
     \paragraph*{}
-    Coucou ceci est un test !
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}
@@ -274,7 +273,8 @@
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps200xg300xmr1-10-4.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps200xg300xmr1-10-4.csv};
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps200xg300xmr1-10-4.csv};
-              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps200xg300xmr1-10-4.csv};
+              \addplot[line width=1.0pt, mark=x]
+                       table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps200xg300xmr1-10-4.csv}; 
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps200xg300xmr1-10-4.csv};
               \addplot table [col sep=comma,x=generationnumber,y=diversity]       {ps200xg300xmr1-10-4.csv};
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
@@ -284,6 +284,9 @@
       \label{fig:ps200xg300xmr1-10-4.csv}
     \end{figure}
     \paragraph*{}
+    For this for fourth graph, first, we can notice that the resistance to gene 2 survivability ratio is 
+   we can notice that the resitance to gene 3 survivability ratio doesn't increase as fast as the three others (genes 0, 1, 4)
+    
 
     \begin{figure}[H] 
       \centering
