@@ -11,14 +11,13 @@ from numpy               import matrix, array, array_equal
 from statistics          import mean, variance
 from collections         import defaultdict
 
-
-import genomat.config as config
-import genomat.stats  as stats
-
+from genomat.observable  import Observable
 from genomat.geneNetwork import GeneNetwork
 from genomat.config      import POP_SIZE, MUTATION_RATE, GENE_NUMBER, SEED_VALUE
 from genomat.config      import PARENT_COUNT, INITIAL_PHENOTYPE, DO_STATS, STATS_FILE
 from genomat.progressbar import create_progress_bar, update_progress_bar, finish_progress_bar
+
+import genomat.config as config
 
 
 #########################
@@ -27,7 +26,17 @@ from genomat.progressbar import create_progress_bar, update_progress_bar, finish
 
 
 
-class Population:
+#########################
+# POPULATION CLASS      #
+#########################
+class Population(Observable):
+    """
+    Definition of a population of GeneNetwork, implemented as a list and that can step().
+    Stepping is the operation of create a new population from the current one, 
+    and replace olds by youngs.
+    Use multithreading if possible (non necessity of exact reproductibility)
+    Is observables by stats modules.
+    """
 
     def __init__(self, configuration):
         """The population is defined by the number of individual it is composed of.
@@ -36,6 +45,7 @@ class Population:
         OUT:
             A population
         """
+        super().__init__()
         self.configuration = configuration
         self.generate_pop(configuration)
 
@@ -81,18 +91,18 @@ class Population:
                     # random seed value, so using thread is possible 
                     #   (reproductibility not necessary)
                     with concurrent.futures.ProcessPoolExecutor() as executor:
-                        for new_indiv in executor.map(self.new_viable_indiv, [None]*pop_size):
+                        for new_indiv in executor.map(new_viable_indiv, [(self.indivs, self.configuration)]*pop_size):
                             new_indivs.append(new_indiv)
                 else:
                     # random seed given, so, for provides reproductibility, 
                     #   no thread must be used
                     while len(new_indivs) < pop_size:
-                        new_indivs.append(self.new_viable_indiv())
+                        new_indivs.append(new_viable_indiv((self.indivs, self.configuration)))
                 assert(self.size == pop_size)
                 # replace olds by youngs
                 self.indivs = new_indivs
                 # do stats on youngs
-                stats.update(self, generation_number)
+                self.notify_observers(self, generation_number)
                 # show to user that its computer is doing something
                 update_progress_bar(generation_number, times)
         except (KeyboardInterrupt, concurrent.futures.process.BrokenProcessPool):
@@ -100,25 +110,6 @@ class Population:
 
         # finish it !
         finish_progress_bar()
-
-
-    def new_viable_indiv(self, none=None):
-        """
-        Return a new indiv, create from population crossing, 
-        eventually mutated. Indiv is viable.
-        Nothing keyword is an unused arg used for give map compatibility.
-        """
-        new_indiv = None
-        while new_indiv is None or not new_indiv.is_viable(self.configuration):
-            parents = random.sample(
-                self.indivs, 
-                self.configuration[PARENT_COUNT]
-            )
-            new_indiv = GeneNetwork.mutated(
-                GeneNetwork.from_crossing(parents), 
-                self.configuration
-            )
-        return new_indiv
 
 
     def deactivate_genes(self, genes=None):
@@ -211,5 +202,30 @@ class Population:
 
 
 
+
+
+#########################
+# FUNCTION              #
+#########################
+def new_viable_indiv(payload):
+    """
+    Return a new indiv, create from given individuals 
+    crossing in given configuration, eventually mutated. 
+    Indiv is viable.
+    Payload argument must be a 2tuple that contain individuals and configuration.
+    (multithreading compatibility)
+    """
+    individuals, configuration = payload
+    new_indiv = None
+    while new_indiv is None or not new_indiv.is_viable(configuration):
+        parents = random.sample(
+            individuals, 
+            configuration[PARENT_COUNT]
+        )
+        new_indiv = GeneNetwork.mutated(
+            GeneNetwork.from_crossing(parents), 
+            configuration
+        )
+    return new_indiv
 
 

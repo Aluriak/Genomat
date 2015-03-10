@@ -21,7 +21,7 @@ import math
 from functools   import partial
 from itertools   import product
 from collections import defaultdict
-from genomat.config import DO_STATS, STATS_FILE, GENE_NUMBER, SAVE_PROFILES, SAVE_NETWORKS, PROFILES_FILE, NETWORKS_FILE
+from genomat.config import DO_STATS, STATS_FILE, GENE_NUMBER
 import numpy as np
 
 
@@ -31,9 +31,6 @@ import numpy as np
 #########################
 stats_file      = None
 stats_writer    = None
-networks_file   = None
-profiles_file   = None
-profiles_writer = None
 ratio_data      = defaultdict(list)
 
 
@@ -41,43 +38,26 @@ ratio_data      = defaultdict(list)
 #########################
 # MAIN FUNCTIONS        #
 #########################
-def initialize(configuration):
-    """Open files"""
-    global stats_file, stats_writer, networks_file, profiles_file, profiles_writer
-
-    if configuration[DO_STATS]:
-        stats_file = None
+class Statistics():
+    def __init__(self, configuration):
+        """Open files"""
+        # open files
         openf = partial(open, configuration[STATS_FILE])
-        stats_file = openf('w' if configuration['erase_previous_stats'] else 'a')
-        stats_writer = csv.DictWriter(
-            stats_file, 
+        self.stats_file = openf('w' if configuration['erase_previous_stats'] else 'a')
+        self.stats_writer = csv.DictWriter(
+            self.stats_file, 
             fieldnames=stats_file_keys(configuration[GENE_NUMBER])
         )
         # print header if no previous stats
         if configuration['erase_previous_stats']:
-            stats_writer.writeheader()
-
-    if configuration[SAVE_NETWORKS]:
-        networks_file = open(configuration[NETWORKS_FILE], 'w')
-
-    if configuration[SAVE_PROFILES]:
-        # open file, initialize the writer, write header
-        profiles_file = open(configuration[PROFILES_FILE], 'w')
-        profiles_writer = csv.DictWriter(
-            profiles_file, 
-            fieldnames=profiles_file_keys(configuration[GENE_NUMBER])
-        )
-        profiles_writer.writeheader()
+            self.stats_writer.writeheader()
 
 
+    def update(self, population, generation_number):
+        """create stats, save them"""
+        configuration = population.configuration
 
-def update(population, generation_number):
-    """create stats, save them"""
-    global stats_file, stats_writer, ratio_data, networks_file, profiles_file
-    configuration = population.configuration
-
-    if configuration[DO_STATS]:
-        if stats_file is None: return # case where no initialize was called
+        if self.stats_file is None: return # case where no initialize was called
         # init
         gene_number = configuration[GENE_NUMBER]
         ratios    = [population.test_genes([gene])[1] for gene in range(gene_number)]
@@ -87,7 +67,7 @@ def update(population, generation_number):
         diversity = (len(genotypes)-1) / population.size
 
         # get values and write them in file
-        stats_writer.writerow(stats_file_values(
+        self.stats_writer.writerow(stats_file_values(
             population.size,
             gene_number,
             generation_number,
@@ -96,34 +76,11 @@ def update(population, generation_number):
             ratios_db
         ))
 
-    if configuration[SAVE_NETWORKS]:
-        networks_file.write('\n==========================\n')
-        networks_file.write('\n'.join(str(_) for _ in genotypes))
-        networks_file.write('DIVERSITY:' + str(diversity))
 
-    if configuration[SAVE_PROFILES]:
-        profiles_writer.writerow(
-            profiles_file_values(population.profiles, generation_number)
-        )
-
-
-
-
-def finalize(population):
-    """Close files"""
-    global stats_file, ratio_data, networks_file, profiles_file
-    configuration = population.configuration
-
-    if configuration[DO_STATS]:
-        stats_file.close()
-        stats_file = None
-    if population.configuration[SAVE_NETWORKS]:
-        networks_file.close()
-        networks_file = None
-
-    if configuration[SAVE_PROFILES]:
-        profiles_file.close()
-        profiles_file = None
+    def finalize(self, population):
+        """Close files"""
+        self.stats_file.close()
+        self.stats_file = None
 
 
 
@@ -143,17 +100,6 @@ def stats_file_keys(gene_number):
     ]
 
 
-def profiles_file_keys(gene_number):
-    """Return fiels in profiles file, ordered, as a list of string"""
-    return ['generation'] + [
-        'mean'+str(gene)+'x'+str(col) 
-        for gene, col in product(range(gene_number), repeat=2)
-    ] + [
-        'varc'+str(gene)+'x'+str(col) 
-        for gene, col in product(range(gene_number), repeat=2)
-    ]
-
-
 def stats_file_values(pop_size, gene_number, generation_number, diversity, viability_ratios, viability_ratios_db):
     """Return a dict usable with csv.DictWriter for stats file"""
     values = {
@@ -169,18 +115,6 @@ def stats_file_values(pop_size, gene_number, generation_number, diversity, viabi
                    for index, ratio in enumerate(viability_ratios_db)
                   })
     return values
-
-
-def profiles_file_values(profiles, generation_number):
-    """Return a dict usable with csv.DictWriter for profiles file"""
-    means, varc = profiles
-    means = {'mean'+str(k[0])+'x'+str(k[1]): v for k,v in means.items()}
-    varc  = {'varc'+str(k[0])+'x'+str(k[1]): v for k,v in varc.items()}
-    # return all
-    means.update(varc)
-    means['generation'] = generation_number
-    return means
-
 
 
 

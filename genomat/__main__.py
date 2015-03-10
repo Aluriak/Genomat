@@ -50,14 +50,11 @@ import random
 #########################
 # PRE-DECLARATIONS      #
 #########################
-
-
-
-
-#########################
-# MAIN                  #
-#########################
-if __name__ is '__main__':
+def configuration_generation():
+    """
+    Generate configuration from command line arguments, 
+    files and default config.
+    """
     # parse args and add them to args configuration
     config_args = {}
     arguments = docopt(__doc__, version=config.VERSION)
@@ -80,7 +77,16 @@ if __name__ is '__main__':
     # load configuration from file
     config_file = config.load(filename=config_args[config.CONFIG_FILE])
     # merge configs as configuration
-    configuration = ChainMap({}, config_args, config_file)
+    return ChainMap({}, config_args, config_file)
+
+
+
+
+#########################
+# MAIN                  #
+#########################
+if __name__ is '__main__':
+    configuration = configuration_generation()
 
     # initialize seed if needed
     if configuration[config.SEED_VALUE] is not None:
@@ -88,8 +94,6 @@ if __name__ is '__main__':
     # save it if asked
     if configuration['save_config']:
         config.save(dict(configuration), filename=configuration[config.CONFIG_FILE])
-    # do stats
-    stats.initialize(configuration)
 
     # print used configuration
     print('USED CONFIGURATION IS:\n', config.prettify(configuration, '\t'), "\n---------------\n", sep='')
@@ -109,6 +113,11 @@ if __name__ is '__main__':
     for generation_count in configuration[config.GENERATION_COUNTS]:
         print('START FOR', generation_count, 'GENERATIONS.')
         pop = Population(configuration)
+        # add asked observers
+        for observer_needed, observer in zip((configuration[config.SAVE_NETWORKS], configuration[config.SAVE_PROFILES], configuration[config.DO_STATS]), (stats.networks.StatsNetworks, stats.profiles.StatsProfiles, stats.stats.Statistics)):
+            if observer_needed:
+                pop.attach_observer(observer(configuration))
+        # continue printing
         print('POPULATION OF', configuration[config.POP_SIZE], 'INDIVIDUES CREATED.')
         pop.step(generation_count)
         print('DONE. NOW TEST KO OF A RANDOM GENE.')
@@ -118,7 +127,7 @@ if __name__ is '__main__':
     
 
     # finalize all
-    stats.finalize(pop)
+    pop.finalize_observers()
 
 
 

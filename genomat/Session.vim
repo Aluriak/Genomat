@@ -16,7 +16,9 @@ badd +1 gene_network/geneNetwork.py
 badd +1 ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat_func/__main__.py
 badd +1 config/config.py
 badd +1 geneNetwork/geneNetwork.py
-badd +0 stats/stats.py
+badd +1 stats/stats.py
+badd +0 stats/networks.py
+badd +0 stats/profiles.py
 argglobal
 silent! argdel *
 argadd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/__main__.py
@@ -42,7 +44,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 43 - ((29 * winheight(0) + 19) / 39)
+let s:l = 43 - ((42 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -66,7 +68,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -90,7 +92,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -114,7 +116,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -138,13 +140,65 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 3 - ((2 * winheight(0) + 19) / 39)
+let s:l = 3 - ((2 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 3
 normal! 025|
 lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
+tabedit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/stats/profiles.py
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 119 + 119) / 239)
+exe 'vert 2resize ' . ((&columns * 119 + 119) / 239)
+argglobal
+edit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/stats/profiles.py
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 28) / 56)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
+wincmd w
+argglobal
+edit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat/stats/networks.py
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 28) / 56)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
+wincmd w
+exe 'vert 1resize ' . ((&columns * 119 + 119) / 239)
+exe 'vert 2resize ' . ((&columns * 119 + 119) / 239)
 tabedit ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat_func/__main__.py
 set splitbelow splitright
 set nosplitbelow
@@ -163,14 +217,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 144 - ((17 * winheight(0) + 19) / 39)
+let s:l = 144 - ((24 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 144
 normal! 034|
 lcd ~/Programmation/Cours/BIG_M1/PRJ/genomat/genomat
-tabnext 5
+tabnext 6
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
