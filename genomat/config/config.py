@@ -38,6 +38,7 @@ SAVE_NETWORKS       = 'save_networks'
 NETWORKS_FILE       = 'networks_file'
 SAVE_PROFILES       = 'save_profiles'
 PROFILES_FILE       = 'profiles_file'
+SEED_VALUE          = 'seed'
 # use theses keys
 default_configuration = {
     POP_SIZE:               20,
@@ -54,6 +55,7 @@ default_configuration = {
     NETWORKS_FILE:          'data/networks.txt',
     SAVE_PROFILES:          False,
     PROFILES_FILE:          'data/profiles.csv',
+    SEED_VALUE:             None,
 }
 
 
