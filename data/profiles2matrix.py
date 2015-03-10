@@ -1,4 +1,7 @@
-
+"""
+dirty and dumb module that convert csv file 
+data in a latex-compatible test that describes a matrix.
+"""
 
 
 from math import sqrt
@@ -31,9 +34,9 @@ if __name__ == '__main__':
             coords = str(i) + 'x' + str(j)
             mean_val = 'mean' + coords
             varc_val = 'stdev' + coords
-            output += (str(round(float(last_entry[mean_val]), 2)) 
+            output += (str(int(float(last_entry[mean_val]))) 
                        + ' +- ' 
-                       +  str(round(float(last_entry[varc_val]), 2)) + ' & ')
+                       +  str(int(float(last_entry[varc_val]))) + ' & ')
         output = output.rstrip(' \t& \t') + ' \\\\'
 
     output = output.rstrip('\\\\') + '\n\\end{pmatrix}\n'
