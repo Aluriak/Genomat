@@ -99,7 +99,7 @@ def update(population, generation_number):
     if configuration[SAVE_NETWORKS]:
         networks_file.write('\n==========================\n')
         networks_file.write('\n'.join(str(_) for _ in genotypes))
-        networks_file.write('DIVERSITY:', diversity)
+        networks_file.write('DIVERSITY:' + str(diversity))
 
     if configuration[SAVE_PROFILES]:
         profiles_writer.writerow(
@@ -174,8 +174,8 @@ def stats_file_values(pop_size, gene_number, generation_number, diversity, viabi
 def profiles_file_values(profiles, generation_number):
     """Return a dict usable with csv.DictWriter for profiles file"""
     means, varc = profiles
-    means = {'mean' +str(k[0])+'x'+str(k[1]): v for k,v in means.items()}
-    varc  = {'varc'+str(k[0])+'x'+str(k[1]): v for k,v in stdev.items()}
+    means = {'mean'+str(k[0])+'x'+str(k[1]): v for k,v in means.items()}
+    varc  = {'varc'+str(k[0])+'x'+str(k[1]): v for k,v in varc.items()}
     # return all
     means.update(varc)
     means['generation'] = generation_number
