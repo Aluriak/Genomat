@@ -16,7 +16,7 @@ import genomat.config as config
 import genomat.stats  as stats
 
 from genomat.geneNetwork import GeneNetwork
-from genomat.config      import POP_SIZE, MUTATION_RATE, GENE_NUMBER
+from genomat.config      import POP_SIZE, MUTATION_RATE, GENE_NUMBER, SEED_VALUE
 from genomat.config      import PARENT_COUNT, INITIAL_PHENOTYPE, DO_STATS, STATS_FILE
 from genomat.progressbar import create_progress_bar, update_progress_bar, finish_progress_bar
 
@@ -77,9 +77,17 @@ class Population:
                 new_indivs = []
                 # while population not filled
                 pop_size = self.configuration[POP_SIZE]
-                with concurrent.futures.ProcessPoolExecutor() as executor:
-                    for new_indiv in executor.map(self.new_viable_indiv, [None]*pop_size):
-                        new_indivs.append(new_indiv)
+                if self.configuration[SEED_VALUE] is None:
+                    # random seed value, so using thread is possible 
+                    #   (reproductibility not necessary)
+                    with concurrent.futures.ProcessPoolExecutor() as executor:
+                        for new_indiv in executor.map(self.new_viable_indiv, [None]*pop_size):
+                            new_indivs.append(new_indiv)
+                else:
+                    # random seed given, so, for provides reproductibility, 
+                    #   no thread must be used
+                    while len(new_indivs) < pop_size:
+                        new_indivs.append(self.new_viable_indiv())
                 assert(self.size == pop_size)
                 # replace olds by youngs
                 self.indivs = new_indivs
