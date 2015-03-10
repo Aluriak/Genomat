@@ -1,6 +1,6 @@
 SOURCE=report
 
-all: move source clean
+all: source clean
 
 clean:
 	- rm *.aux *.log 
@@ -12,6 +12,4 @@ source:
 	pdflatex $(SOURCE).tex && pdflatex $(SOURCE).tex
 	$(MAKE) show
 
-move:
-	- cp ../data/stats.csv ./
 
