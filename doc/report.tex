@@ -16,6 +16,8 @@
 \usepackage{url}                % clickable urls 
 \usepackage{float}              % exact placing of figures
 \usepackage{amsmath}            % fancy matrices
+\usepackage{xkeyval}            % keywords arguments for newcommand
+\usepackage{xifthen}            % provides \isempty test
 
 % packages for graphics
 \usepackage{fancybox}         
@@ -39,6 +41,48 @@
         {Gene4},
         {Diversity}
 }
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIMULATION COMMAND    %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%This is needed for encapsulating.
+%changes the catcode of @ so it
+%can be used freely (not needed
+%when writing a package)
+\makeatletter
+
+\define@cmdkey [SIMPAR] {fam} {generations} [200] {}
+\define@cmdkey [SIMPAR] {fam} {popsize}     [300] {}
+\define@cmdkey [SIMPAR] {fam} {parents}     [2]   {}
+\define@cmdkey [SIMPAR] {fam} {seed}        [4223]{}
+\define@cmdkey [SIMPAR] {fam} {mutationrate}[0.0001] {}
+\define@cmdkey [SIMPAR] {fam} {initialpheno}[1-11-11] {}
+ 
+\presetkeys [SIMPAR] {fam} {generations = 1,
+                            popsize = 2,
+                            parents = 3,
+                            seed = 4,
+                            mutationrate = 5,
+                            initialpheno = 6,
+                           }{}
+
+\newcommand{\simulationParameters}[1]{%
+        \setkeys[SIMPAR]{fam}{#1}
+        \begin{tabular}{|l|c||l|c|}
+        \hline
+        \textbf{Generations computed} & \cmdSIMPAR@fam@generations & \textbf{Population size}     & \cmdSIMPAR@fam@popsize \\ \hline
+        \textbf{Parent number}        & \cmdSIMPAR@fam@parents     & \textbf{Seed}                & \cmdSIMPAR@fam@seed    \\ \hline
+        \textbf{Mutation rate}        & \cmdSIMPAR@fam@mutationrate& \textbf{Initial Phenotype}   & \cmdSIMPAR@fam@initialpheno \\ \hline
+        \end{tabular}
+}
+
+%Change again the @ catcode
+%to normal
+\makeatother
+
 
 
 
@@ -171,53 +215,9 @@
 % SECTION               %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Results through graphics}
-    \subsection*{Exploitation of the default parameters}
     \paragraph*{}
-    %\begin{figure}[H] 
-      %\centering
-      %\begin{tikzpicture}
-          %\begin{axis}[
-                  %%,no mark % retract marks at point location
-                  %,xlabel={Generations}
-                  %,ylabel={Survivability ratio}
-                  %,grid=major % grid on all axis
-                  %,axis lines=left
-                  %,ymajorgrids
-                  %,legend style={legend pos=south east}
-                  %,cycle list name=list
-              %]
-              %\addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps200xg300xmr1-10-0.csv};
-              %\addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps200xg300xmr1-10-0.csv};
-              %\addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps200xg300xmr1-10-0.csv};
-              %\addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps200xg300xmr1-10-0.csv};
-              %\addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps200xg300xmr1-10-0.csv};
-              %\addplot[line width=1.0pt, mark=x] 
-                       %table [col sep=comma,x=generationnumber,y=diversity]       {ps200xg300xmr1-10-0.csv};
-              %\legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
-          %\end{axis}
-      %\end{tikzpicture}
-      %\caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 1}
-      %\label{fig:ps200xg300xmr1-10-0}
-    %\end{figure}
-    %\paragraph*{}
-    %Expectedly, with a mutation rate, diversity never decrease and stay at 1. Because of amplitude of genes regulation values (100), its seems improbable to 
-    %keep the same values from its parents.
-
-    %\begin{figure}[H] 
-            %\centering
-            %\small
-    %$
-            %\begin{pmatrix}
-                    %168.96 +- 6095.41 & -108.56 +- 8107.82 & 75.39 +- 6568.11 & -16.97 +- 14195.04 & 302.03 +- 15496.21 \\
-                    %-96.43 +- 10125.09 & 354.73 +- 25688.58 & 119.89 +- 8266.31 & 120.58 +- 11924.33 & -32.11 +- 27372.64 \\
-                    %-144.99 +- 19419.77 & 143.68 +- 12794.93 & 210.07 +- 5179.57 & 98.02 +- 17349.01 & 6.61 +- 9105.8 \\
-                    %-16.24 +- 11958.28 & -8.39 +- 9449.81 & -30.69 +- 5755.63 & 181.51 +- 16392.27 & 38.59 +- 9058.66 \\
-                    %-24.16 +- 4097.34 & -150.6 +- 16116.54 & -179.62 +- 8841.33 & 102.09 +- 13149.1 & 228.47 +- 5458.7 
-            %\end{pmatrix}
-    %$
-            %\caption{To look \& regenerate}
-            %\label{mat:ps200xg300xmr1-10-0}
-    %\end{figure}
+    The used telltale follow the next rules :
+    \simulationParameters{}
 
 
 
