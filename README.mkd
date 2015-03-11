@@ -17,7 +17,7 @@ Please be sure to use pip for Python3.
 ## functionnal way
 Implemented in *genomat\_func* module.
 Incomplete (and doesn't have completeness for goal), 
-don't implement command line arguments and gene KO.
+don't implement command line arguments and statistics.
 
 
 ## OO way
