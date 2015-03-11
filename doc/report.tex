@@ -143,7 +143,7 @@
 	\paragraph*{}
         The project follows a Python-like packaging, with the main program launchable as a package. (\textit{python -m genomat})
         Many parameters can be sended through command-line arguments, or configuration file.
-        Outputs are mainly in \textsc{csv format}. (notabily those provided for statistics)
+        Outputs are mainly in \textsc{csv format} (notabily those provided for statistics).
 
 	\paragraph*{}
         A second and incomplete implementation of Genomat is available under the name of \textit{genomat\_func}. 
@@ -176,7 +176,7 @@
                 \item[config] management of configurations : files, options, flags, serialization;
                 \item[gene network] definition of an individual, encapsulation of numpy matrix system;
                 \item[population] a list of individuals that provides many data access and call stats modules as an observer;
-                \item[stats] observer of population that tests it and generate, if asked, data in targeted files;
+                \item[stats] observer of population that tests it and generates, if asked, data in targeted files;
                 \item[progress bar] dumb and simple implementation of a progress bar, designed to be replaced later;
         \end{description}
 
@@ -450,6 +450,11 @@
       \label{fig:ps300xg200xmr1-10-5}
     \end{figure}
     \paragraph*{}
+    A mutation rate of $10^{-5}$ is a usual mutation rate in a natural population. This result is thus very insteresting because it really reflects the global conducts of a natural population (as far as we can consider as natural a population composed of only five genes).
+    \paragraph*{}
+    With this mutation rate, we can notice that the five genes have a very similar conduct. Their resistance to gene KO survavibility ratio increase over the 50 first generation, and then, due to the weak mutation rate, stabilize at 1, when, they become unessential.
+    \paragraph*{} 
+    As a result of the genes conduct, the diversity first decreases very slowly during the 50 first generations, and then decreases very fastly from near to 1 to 0.35. 
    
 
     \begin{figure}[H] 
