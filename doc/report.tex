@@ -183,7 +183,7 @@
         \begin{figure}[H] 
                 \centering
                 \includegraphics[width=\textwidth]{packages_genomat.png}
-                \caption{Modules of Genomat architecture, without externals ones (numpy, docopt).}
+                \caption{\footnotesize Modules of Genomat architecture, without externals ones (numpy, docopt).}
                 \label{fig:umldiag}
         \end{figure}
 
@@ -202,12 +202,6 @@
      with a constant population size of 300 individuals and 200 generations.\\
      For each gene, the survavibility ratio is computed. \\The survivability ratio is defined as $S_{g} = \frac{KO_g}{population_{size}}$ 
      with $KO_g$ as the number of individuals still viable after the KO of gene g.
-    \paragraph*{}
-     With those parameters, we can notice the five genes have a similar course : their survivability ratio first fastly 
-     increase from 0.7 during the fifty first generations. After this exponentianal phase, the survavibility ratio reach a plateau about 1. 
-    \paragraph*{}
-
-
 
 
 
@@ -242,7 +236,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$, use as telltale}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$, use as telltale}
       \label{fig:ps300xg200xmr1-10-4}
     \end{figure}
     \paragraph*{}
@@ -264,7 +258,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 9 
             \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-4}
     \end{figure}
     
@@ -274,7 +268,7 @@
     \paragraph*{}
     
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Mutation rate}
     \begin{figure}[H] 
       \centering
@@ -299,11 +293,13 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 1}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 1}
       \label{fig:ps300xg200xmr1-10-0}
     \end{figure}
     \paragraph*{}
-   
+    A mutation rate of 1 means that each gene of each individual of each generation will mutate. It is a theorical case, wich can not happen in a natural population.
+    \paragraph*{}
+    As each gene mutates, there is no resistance to gene KO survivability ratio stabilization, as we could see for the telltale. Each gene is more or less essential. We do not notice a stabilization to a resistance to gene KO survivability of 1, however, all the lines are beyond 0.9, which is very good. As each gene mutates, the diversity is very high (a constant equals to 1), and even if a gene is KO, the diversity given by the mutations allow the invidual to be viable.
 
     \begin{figure}[H] 
             \centering
@@ -317,13 +313,13 @@
                 15 +- 25929 & 58 +- 25518 & 2 +- 10437 & -80 +- 5527 & 241 +- 9406 
             \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-0}
     \end{figure}
     
     
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Mutation rate}
     \begin{figure}[H] 
     \centering
@@ -348,7 +344,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-1}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-1}$}
       \label{fig:ps300xg200xmr1-10-1}
     \end{figure}
     \paragraph*{}
@@ -366,13 +362,13 @@
                 39 +- 3960 & 47 +- 4600 & 14 +- 5258 & 2 +- 1785 & 116 +- 1672 
             \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-1}
     \end{figure}
     
     
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Mutation rate}
     \begin{figure}[H] 
     \centering
@@ -397,7 +393,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-2}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-2}$}
       \label{fig:ps300xg200xmr1-10-2}
     \end{figure}
     \paragraph*{}
@@ -415,13 +411,13 @@
                 -164 +- 10949 & -82 +- 2716 & 106 +- 1495 & -84 +- 12073 & 162 +- 5029  
             \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-2}
     \end{figure}    
     
       
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Mutation rate}    
     \begin{figure}[H] 
     \centering
@@ -446,7 +442,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-5}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-5}$}
       \label{fig:ps300xg200xmr1-10-5}
     \end{figure}
     \paragraph*{}
@@ -464,13 +460,13 @@
                   29 +- 2611 & 92 +- 1664 & 2 +- 2128 & 39 +- 5680 & 151 +- 499 
             \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-5}
     \end{figure}
 
     
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Mutation rate}
     \begin{figure}[H] 
     \centering
@@ -495,7 +491,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-6}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-6}$}
       \label{fig:ps300xg200xmr1-10-6}
     \end{figure}
     \paragraph*{}
@@ -513,12 +509,12 @@
                 -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
            \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-6}
     \end{figure}
 
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Mutation rate}
     \begin{figure}[H] 
     \centering
@@ -543,7 +539,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-10}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-10}$}
       \label{fig:ps300xg200xmr1-10-10}
     \end{figure}
     \paragraph*{}
@@ -561,14 +557,14 @@
                 -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
           \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-10}
     \end{figure}
     
     
     \subsection{Parents number variation}
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Parent number}
     \begin{figure}[H] 
     \centering
@@ -593,7 +589,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and a parents number equals to the population size}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and a parents number equals to the population size}
       \label{fig:ps300xg200xmr1-10-4xprt300}
     \end{figure}
     \paragraph*{}
@@ -611,7 +607,7 @@
                 32 +- 346 & -63 +- 25 & 51 +- 505 & -48 +- 1748 & 145 +- 228 
            \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-4xprt300}
     \end{figure}
     
@@ -620,7 +616,7 @@
     
     \subsection{Initial phenotype variation}
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Initial Phenotype}
     \begin{figure}[H] 
     \centering
@@ -645,7 +641,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype(-1,1,-1,1,-1)}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype(-1,1,-1,1,-1)}
       \label{fig:ps300xg200xmr1-10-4xalt1}
     \end{figure}
     \paragraph*{}
@@ -663,13 +659,13 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-4xalt1}
     \end{figure}
     
     
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Initial Phenotype}
     \begin{figure}[H] 
     \centering
@@ -694,7 +690,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype (1,-1,1,-1,1)}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype (1,-1,1,-1,1)}
       \label{fig:ps300xg200xmr1-10-4xalt2}
     \end{figure}
     \paragraph*{}
@@ -712,14 +708,14 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps300xg200xmr1-10-4xalt2}
     \end{figure}
     
     
     \subsection{Population size variation}
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Population size}
     \begin{figure}[H] 
     \centering
@@ -744,7 +740,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
       \label{fig:ps20xg200xmr1-10-4}
     \end{figure}
     \paragraph*{}
@@ -762,7 +758,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps20xg200xmr1-10-4}
     \end{figure}
     
@@ -770,7 +766,7 @@
     
     \subsection{population size and parent count variation  (consanguinity in little population)}
     \paragraph*{}
-    The used telltale follows the next rules :\\
+    Parameters for the next experience :\\
     \simulationParameters{Population size, Parent number}
     \begin{figure}[H] 
     \centering
@@ -795,7 +791,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
       \label{fig:ps20xg200xprt20xmr1-10-4}
     \end{figure}
     \paragraph*{}
@@ -813,7 +809,7 @@
                 72 +- 0 & 27 +- 0 & 156 +- 0 & -65 +- 0 & 162 +- 0 
            \end{pmatrix}
     $
-            \caption{To look \& regenerate}
+            \caption{\footnotesize To look \& regenerate}
             \label{mat:ps20xg200xprt20xmr1-10-4}
     \end{figure}
 
