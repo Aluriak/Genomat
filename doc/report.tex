@@ -217,7 +217,7 @@
 \section*{Results through graphics}
 \subsection{Telltale}
     \paragraph*{}
-    The used telltale follow the next rules :
+    The used telltale follows the next rules :
     \simulationParameters{}
     \begin{figure}[H] 
       \centering
@@ -229,7 +229,7 @@
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4.csv};
@@ -269,6 +269,9 @@
     \subsection{Mutation rate variation}
     \paragraph*{}
     
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Mutation rate}
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}
@@ -315,10 +318,13 @@
     \end{figure}
     
     
-      \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Mutation rate}
+    \begin{figure}[H] 
+    \centering
+    \begin{tikzpicture}
+       \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
@@ -338,7 +344,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of TODO}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-1}$}
       \label{fig:ps300xg200xmr1-10-1}
     \end{figure}
     \paragraph*{}
@@ -361,10 +367,13 @@
     \end{figure}
     
     
-      \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Mutation rate}
+    \begin{figure}[H] 
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
@@ -384,7 +393,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of TODO}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-2}$}
       \label{fig:ps300xg200xmr1-10-2}
     \end{figure}
     \paragraph*{}
@@ -406,18 +415,21 @@
             \label{mat:ps300xg200xmr1-10-2}
     \end{figure}    
     
-        
+      
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Mutation rate}    
     \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-5.csv};
@@ -452,18 +464,21 @@
             \label{mat:ps300xg200xmr1-10-5}
     \end{figure}
 
-
+    
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Mutation rate}
     \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-6.csv};
@@ -498,19 +513,20 @@
             \label{mat:ps300xg200xmr1-10-6}
     \end{figure}
 
-
-
-\begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Mutation rate}
+    \begin{figure}[H] 
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-10.csv};
@@ -547,17 +563,20 @@
     
     
     \subsection{Parents number variation}
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Parent number}
     \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \centering
+        \begin{tikzpicture}
+            \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xprt300.csv};
@@ -594,18 +613,22 @@
     
     
     
+    
     \subsection{Initial phenotype variation}
-      \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Initial Phenotype}
+    \begin{figure}[H] 
+    \centering
+        \begin{tikzpicture}
+            \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xalt1.csv};
@@ -618,7 +641,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype(1)}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype(-1,1,-1,1,-1)}
       \label{fig:ps300xg200xmr1-10-4xalt1}
     \end{figure}
     \paragraph*{}
@@ -641,17 +664,20 @@
     \end{figure}
     
     
-      \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Initial Phenotype}
+    \begin{figure}[H] 
+    \centering
+    \begin{tikzpicture}
+            \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=south west}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xalt2.csv};
@@ -664,7 +690,7 @@
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype (2)}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype (1,-1,1,-1,1)}
       \label{fig:ps300xg200xmr1-10-4xalt2}
     \end{figure}
     \paragraph*{}
@@ -688,17 +714,20 @@
     
     
     \subsection{Population size variation}
-            \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Population size}
+    \begin{figure}[H] 
+    \centering
+    \begin{tikzpicture}
+            \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=north east}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps20xg200xmr1-10-4.csv};
@@ -736,17 +765,20 @@
     
     
     \subsection{population size and parent count variation  (consanguinity in little population)}
-      \begin{figure}[H] 
-      \centering
-      \begin{tikzpicture}
-          \begin{axis}[
+    \paragraph*{}
+    The used telltale follows the next rules :
+    \simulationParameters{Population size, Parent number}
+    \begin{figure}[H] 
+    \centering
+    \begin{tikzpicture}
+            \begin{axis}[
                   %,no mark % retract marks at point location
                   ,xlabel={Generations}
                   ,ylabel={Survivability ratio}
                   ,grid=major % grid on all axis
                   ,axis lines=left
                   ,ymajorgrids
-                  ,legend style={legend pos=south east}
+                  ,legend style={legend pos=north east}
                   ,cycle list name=list
               ]
               \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps20xg200xprt20xmr1-10-4.csv};
@@ -817,4 +849,3 @@
 %\end{appendix}
 \end{document}
 % END
-
