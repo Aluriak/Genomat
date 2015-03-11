@@ -215,13 +215,592 @@
 % SECTION               %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Results through graphics}
+\subsection{Telltale}
     \paragraph*{}
     The used telltale follow the next rules :
     \simulationParameters{}
+    \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-4xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-4xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$, use as telltale}
+      \label{fig:ps300xg200xmr1-10-4xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+            \begin{pmatrix}
+                150 +- 190 & -2 +- 335 & 177 +- 295 & 23 +- 175 & 4 +- 1426 \\
+                146 +- 10206 & 76 +- 9686 & -18 +- 4078 & 52 +- 9762 & -40 +- 2479 \\
+                -4 +- 0 & -33 +- 401 & 208 +- 608 & -9 +- 85 & 42 +- 1103 \\
+                -67 +- 4290 & -17 +- 472 & -56 +- 186 & 57 +- 1245 & 67 +- 3686 \\
+                -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 9 
+
+            \end{pmatrix}
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-4xprfl}
+    \end{figure}
+    
+    
+    
+    \subsection{Mutation rate variation}
+    \paragraph*{}
+    
+    \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-0xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-0xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-0xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-0xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-0xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-0xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of 1}
+      \label{fig:ps300xg200xmr1-10-0xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+            \begin{pmatrix}
+                304 +- 8526 & -39 +- 33750 & 119 +- 15040 & 15 +- 8066 & -26 +- 4692 \\
+                138 +- 21689 & 291 +- 7052 & 94 +- 33661 & 55 +- 10078 & 62 +- 17995 \\
+                326 +- 9222 & 121 +- 2688 & 156 +- 10334 & -90 +- 9970 & -234 +- 19612 \\
+                87 +- 6326 & -78 +- 9487 & 63 +- 5292 & 223 +- 6283 & 128 +- 14690 \\
+                15 +- 25929 & 58 +- 25518 & 2 +- 10437 & -80 +- 5527 & 241 +- 9406 
+            \end{pmatrix}
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-0xprfl}
+    \end{figure}
+    
+    
+      \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-1xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-1xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of TODO}
+      \label{fig:ps300xg200xmr1-10-1xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+            \begin{pmatrix}
+                98 +- 6039 & -26 +- 2711 & 28 +- 3244 & 75 +- 2903 & 13 +- 926 \\
+                -39 +- 2815 & 152 +- 3468 & 45 +- 700 & -33 +- 796 & -45 +- 658 \\
+                -31 +- 2053 & 71 +- 9285 & 120 +- 6335 & 9 +- 5160 & 80 +- 6374 \\
+                -22 +- 4187 & -53 +- 612 & 27 +- 693 & 68 +- 785 & 152 +- 2428 \\
+                39 +- 3960 & 47 +- 4600 & 14 +- 5258 & 2 +- 1785 & 116 +- 1672 
+            \end{pmatrix}
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-1xprfl}
+    \end{figure}
+    
+    
+      \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-2xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-2xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of TODO}
+      \label{fig:ps300xg200xmr1-10-2xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+            \begin{pmatrix}
+                201 +- 5007 & -10 +- 3188 & 35 +- 8854 & -10 +- 7485 & 51 +- 666 \\
+                55 +- 106 & 298 +- 215 & 61 +- 227 & 35 +- 100 & 80 +- 265 \\
+                41 +- 743 & 119 +- 1950 & 109 +- 3238 & -132 +- 7931 & 54 +- 1729 \\
+                -62 +- 567 & -39 +- 1281 & -16 +- 93 & 167 +- 4186 & -55 +- 613 \\
+                -164 +- 10949 & -82 +- 2716 & 106 +- 1495 & -84 +- 12073 & 162 +- 5029  
+            \end{pmatrix}
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-2xprfl}
+    \end{figure}    
+    
+        
+    \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-5xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-5xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-5xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-5xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-5xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-5xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-5}$}
+      \label{fig:ps300xg200xmr1-10-5xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+            \begin{pmatrix}
+                  193 +- 211 & 43 +- 1393 & 24 +- 80 & -80 +- 570 & 7 +- 362 \\
+                  92 +- 1732 & 155 +- 75 & 106 +- 7319 & 105 +- 8293 & -15 +- 1104 \\
+                  24 +- 3515 & 17 +- 3064 & 107 +- 9182 & 14 +- 1100 & -17 +- 1364 \\
+                  -100 +- 1215 & 185 +- 7793 & 84 +- 415 & 164 +- 582 & -91 +- 191 \\
+                  29 +- 2611 & 92 +- 1664 & 2 +- 2128 & 39 +- 5680 & 151 +- 499 
+            \end{pmatrix}
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-5xprfl}
+    \end{figure}
+
+
+    \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-6xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-6xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-6xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-6xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-6xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-6xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-6}$}
+      \label{fig:ps300xg200xmr1-10-6xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                183 +- 1857 & 18 +- 629 & 4 +- 2699 & -67 +- 3022 & 28 +- 1536 \\
+                59 +- 893 & 163 +- 0 & -74 +- 519 & 0 +- 68 & 8 +- 35 \\
+                24 +- 1280 & 49 +- 1121 & 120 +- 1129 & 63 +- 1735 & 9 +- 345 \\
+                -71 +- 5017 & 52 +- 852 & 52 +- 66 & 96 +- 3062 & 37 +- 8393 \\
+                -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
+           \end{pmatrix}
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-6xprfl}
+    \end{figure}
 
 
 
+\begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-10xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-10xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-10xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-10xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-10xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-10xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-10}$}
+      \label{fig:ps300xg200xmr1-10-10xprfl}
+    \end{figure}
+    \paragraph*{}
+   
 
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                183 +- 1857 & 18 +- 629 & 4 +- 2699 & -67 +- 3022 & 28 +- 1536 \\
+                50 +- 0 & 163 +- 0 & -82 +- 0 & 3 +- 0 & 7 +- 0 \\
+                62 +- 1789 & 53 +- 513 & 64 +- 3193 & 45 +- 1050 & 7 +- 154 \\
+                -71 +- 5017 & 52 +- 852 & 52 +- 66 & 96 +- 3062 & 37 +- 8393 \\
+                -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
+          \end{pmatrix}
+
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-10xprfl}
+    \end{figure}
+    
+    
+    \subsection{Parents number variation}
+    \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xprt300xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-4xprt300xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-4xprt300xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-4xprt300xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-4xprt300xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-4xprt300xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and a parents number equals to the population size}
+      \label{fig:ps300xg200xmr1-10-4xprt300xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                158 +- 33 & -54 +- 45 & -34 +- 156 & -34 +- 23 & 19 +- 7 \\
+                43 +- 29703 & 119 +- 2324 & -2 +- 1960 & 38 +- 4162 & 108 +- 167 \\
+                40 +- 986 & 31 +- 1520 & 84 +- 1048 & -49 +- 2087 & 60 +- 4 \\
+                7 +- 1727 & -50 +- 933 & 17 +- 360 & 96 +- 1686 & 51 +- 2458 \\
+                32 +- 346 & -63 +- 25 & 51 +- 505 & -48 +- 1748 & 145 +- 228 
+           \end{pmatrix}
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-4xprt300xprfl}
+    \end{figure}
+    
+    
+    
+    \subsection{Initial phenotype variation}
+      \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xalt1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-4xalt1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-4xalt1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-4xalt1xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-4xalt1xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-4xalt1xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype(1)}
+      \label{fig:ps300xg200xmr1-10-4xalt1xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                150 +- 190 & -2 +- 335 & 177 +- 295 & 23 +- 175 & 4 +- 1426 \\
+                146 +- 10206 & 76 +- 9686 & -18 +- 4078 & 52 +- 9762 & -40 +- 2479 \\
+                -4 +- 0 & -33 +- 401 & 208 +- 608 & -9 +- 85 & 42 +- 1103 \\
+                -67 +- 4290 & -17 +- 472 & -56 +- 186 & 57 +- 1245 & 67 +- 3686 \\
+                -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
+           \end{pmatrix}
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-4xalt1xprfl}
+    \end{figure}
+    
+    
+      \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps300xg200xmr1-10-4xalt2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps300xg200xmr1-10-4xalt2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps300xg200xmr1-10-4xalt2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps300xg200xmr1-10-4xalt2xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps300xg200xmr1-10-4xalt2xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps300xg200xmr1-10-4xalt2xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype (2)}
+      \label{fig:ps300xg200xmr1-10-4xalt2xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                150 +- 190 & -2 +- 335 & 177 +- 295 & 23 +- 175 & 4 +- 1426 \\
+                146 +- 10206 & 76 +- 9686 & -18 +- 4078 & 52 +- 9762 & -40 +- 2479 \\
+                -4 +- 0 & -33 +- 401 & 208 +- 608 & -9 +- 85 & 42 +- 1103 \\
+                -67 +- 4290 & -17 +- 472 & -56 +- 186 & 57 +- 1245 & 67 +- 3686 \\
+                -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
+           \end{pmatrix}
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps300xg200xmr1-10-4xalt2xprfl}
+    \end{figure}
+    
+    
+    \subsection{Population size variation}
+            \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps20xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps20xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps20xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps20xg200xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps20xg200xmr1-10-4xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps20xg200xmr1-10-4xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
+      \label{fig:ps20xg200xmr1-10-4xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                150 +- 190 & -2 +- 335 & 177 +- 295 & 23 +- 175 & 4 +- 1426 \\
+                146 +- 10206 & 76 +- 9686 & -18 +- 4078 & 52 +- 9762 & -40 +- 2479 \\
+                -4 +- 0 & -33 +- 401 & 208 +- 608 & -9 +- 85 & 42 +- 1103 \\
+                -67 +- 4290 & -17 +- 472 & -56 +- 186 & 57 +- 1245 & 67 +- 3686 \\
+                -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
+           \end{pmatrix}
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps20xg200xmr1-10-4xprfl}
+    \end{figure}
+    
+    
+    
+    \subsection{population size and parent count variation  (consanguinity in little population)}
+      \begin{figure}[H] 
+      \centering
+      \begin{tikzpicture}
+          \begin{axis}[
+                  %,no mark % retract marks at point location
+                  ,xlabel={Generations}
+                  ,ylabel={Survivability ratio}
+                  ,grid=major % grid on all axis
+                  ,axis lines=left
+                  ,ymajorgrids
+                  ,legend style={legend pos=south east}
+                  ,cycle list name=list
+              ]
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio0] {ps20xg200xprt20xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio1] {ps20xg200xprt20xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio2] {ps20xg200xprt20xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio3] {ps20xg200xprt20xmr1-10-4xprfl.csv};
+              \addplot table [col sep=comma,x=generationnumber,y=viabilityratio4] {ps20xg200xprt20xmr1-10-4xprfl.csv};
+              \addplot[line width=1.0pt, mark=x] 
+                       table [col sep=comma,x=generationnumber,y=diversity]       {ps20xg200xprt20xmr1-10-4xprfl.csv};
+              \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
+      \label{fig:ps20xg200xprt20xmr1-10-4xprfl}
+    \end{figure}
+    \paragraph*{}
+   
+
+    \begin{figure}[H] 
+            \centering
+            \small
+    $
+          \begin{pmatrix}
+                78 +- 0 & 40 +- 0 & -15 +- 0 & 56 +- 0 & 126 +- 0 \\
+                136 +- 0 & 231 +- 0 & -3 +- 0 & 21 +- 0 & -40 +- 0 \\
+                21 +- 0 & 153 +- 0 & 83 +- 0 & -6 +- 0 & -43 +- 0 \\
+                -140 +- 0 & 75 +- 0 & 62 +- 0 & 126 +- 0 & 119 +- 0 \\
+                72 +- 0 & 27 +- 0 & 156 +- 0 & -65 +- 0 & 162 +- 0 
+           \end{pmatrix}
+
+
+    $
+            \caption{To look \& regenerate}
+            \label{mat:ps20xg200xprt20xmr1-10-4xprfl}
+    \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
