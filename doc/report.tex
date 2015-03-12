@@ -54,29 +54,34 @@
 %when writing a package)
 \makeatletter
 
-\define@cmdkey [SIMPAR] {fam} {generations} [200] {}
-\define@cmdkey [SIMPAR] {fam} {popsize}     [300] {}
-\define@cmdkey [SIMPAR] {fam} {parents}     [2]   {}
-\define@cmdkey [SIMPAR] {fam} {seed}        [4223]{}
-\define@cmdkey [SIMPAR] {fam} {mutationrate}[0.0001] {}
-\define@cmdkey [SIMPAR] {fam} {initialpheno}[1-11-11] {}
+\define@cmdkey [SIMPAR] {fam} {generations} {}
+\define@cmdkey [SIMPAR] {fam} {popsize}     {}
+\define@cmdkey [SIMPAR] {fam} {parents}     {}
+\define@cmdkey [SIMPAR] {fam} {seed}        {}
+\define@cmdkey [SIMPAR] {fam} {mutationrate}{}
+\define@cmdkey [SIMPAR] {fam} {initialpheno}{}
+\define@cmdkey [SIMPAR] {fam} {link}        {}
  
-\presetkeys [SIMPAR] {fam} {generations = 1,
-                            popsize = 2,
-                            parents = 3,
-                            seed = 4,
-                            mutationrate = 5,
-                            initialpheno = 6,
+\presetkeys [SIMPAR] {fam} {generations  = 200,
+                            popsize      = 300,
+                            parents      = 2,
+                            seed         = 4223,
+                            mutationrate = $10^{-4}$,
+                            initialpheno = 11111,
+                            link         = ?,
                            }{}
 
 \newcommand{\simulationParameters}[1]{%
         \setkeys[SIMPAR]{fam}{#1}
-        \begin{tabular}{|l|c||l|c|}
-        \hline
-        \textbf{Generations computed} & \cmdSIMPAR@fam@generations & \textbf{Population size}     & \cmdSIMPAR@fam@popsize \\ \hline
-        \textbf{Parent number}        & \cmdSIMPAR@fam@parents     & \textbf{Seed}                & \cmdSIMPAR@fam@seed    \\ \hline
-        \textbf{Mutation rate}        & \cmdSIMPAR@fam@mutationrate& \textbf{Initial Phenotype}   & \cmdSIMPAR@fam@initialpheno \\ \hline
-        \end{tabular}
+        \begin{center}
+                \begin{tabular}{|l|c||l|c|}
+                \hline
+                \textbf{Generations computed}   & \cmdSIMPAR@fam@generations    & \textbf{Population size}      & \cmdSIMPAR@fam@popsize        \\ \hline
+                \textbf{Parent number}          & \cmdSIMPAR@fam@parents        & \textbf{Mutation rate}        & \cmdSIMPAR@fam@mutationrate   \\ \hline
+                \textbf{Seed}                   & \cmdSIMPAR@fam@seed           & \textbf{Initial Phenotype}    & \cmdSIMPAR@fam@initialpheno   \\ \hline
+                \textbf{Figure}                 & \ref{fig:\cmdSIMPAR@fam@link} & \textbf{Matrix}               & \ref{mat:\cmdSIMPAR@fam@link} \\ \hline
+                \end{tabular}
+        \end{center}
 }
 
 %Change again the @ catcode
@@ -97,7 +102,7 @@
 % FORMAT PAGES         
 \pagestyle{fancy} % nom du rendu (définit les lignes suivantes)
         \lhead{M1 BIG} % left head
-        \chead{} % center head
+        \chead{Genomat} % center head
         \rhead{2014/2015} % right head
         \lfoot{} % left foot
         \cfoot{\thepage/\pageref{LastPage}} % center foot
@@ -200,7 +205,8 @@
     \paragraph*{}
      First, as there was no mutation rate given, exploited simulations use a mutation rate from $10^{-0}$ to $10^{-6}$, 
      with a constant population size of 300 individuals and 200 generations.\\
-     For each gene, the survavibility ratio is computed. \\The survivability ratio is defined as $S_{g} = \frac{KO_g}{population_{size}}$ 
+     For each gene, the survavibility ratio is computed. \\
+     The survivability ratio is defined as $S_{g} = \frac{KO_g}{population_{size}}$ 
      with $KO_g$ as the number of individuals still viable after the KO of gene g.
 
 
@@ -208,11 +214,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
 %%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section*{Results through graphics}
 \subsection{Telltale}
     \paragraph*{}
     The used telltale follows the next rules :\\
-    \simulationParameters{}
+    \simulationParameters{link=telltale}
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}
@@ -237,7 +244,7 @@
           \end{axis}
       \end{tikzpicture}
       \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$, use as telltale}
-      \label{fig:ps300xg200xmr1-10-4}
+      \label{fig:telltale}
     \end{figure}
     \paragraph*{}
     We chose to use the mutation rate of $10^{-4}$ as the default parameter because it is a medium value, which can be a "natural" mutation rate, to which it will be easy to compare the other data.
@@ -258,8 +265,8 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 9 
             \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
-            \label{mat:ps300xg200xmr1-10-4}
+            \caption{\footnotesize TODO: Caption needed}
+            \label{mat:telltale}
     \end{figure}
     
     
@@ -269,7 +276,7 @@
     
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Mutation rate}
+    \simulationParameters{mutationrate=$10^{-0}$, link=ps300xg200xmr1-10-0}
     \begin{figure}[H] 
       \centering
       \begin{tikzpicture}
@@ -313,14 +320,14 @@
                 15 +- 25929 & 58 +- 25518 & 2 +- 10437 & -80 +- 5527 & 241 +- 9406 
             \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-0}
     \end{figure}
     
     
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Mutation rate}
+    \simulationParameters{mutationrate=$10^{-1}$, link=ps300xg200xmr1-10-1}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -365,14 +372,14 @@
                 39 +- 3960 & 47 +- 4600 & 14 +- 5258 & 2 +- 1785 & 116 +- 1672 
             \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-1}
     \end{figure}
     
     
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Mutation rate}
+    \simulationParameters{mutationrate=$10^{-2}$, link=ps300xg200xmr1-10-2}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -415,14 +422,14 @@
                 -164 +- 10949 & -82 +- 2716 & 106 +- 1495 & -84 +- 12073 & 162 +- 5029  
             \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-2}
     \end{figure}    
     
       
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Mutation rate}    
+    \simulationParameters{mutationrate=$10^{-5}$, link=ps300xg200xmr1-10-5}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -469,14 +476,14 @@
                   29 +- 2611 & 92 +- 1664 & 2 +- 2128 & 39 +- 5680 & 151 +- 499 
             \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-5}
     \end{figure}
 
     
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Mutation rate}
+    \simulationParameters{mutationrate=$10^{-6}$, link=ps300xg200xmr1-10-6}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -518,13 +525,13 @@
                 -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
            \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-6}
     \end{figure}
 
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Mutation rate}
+    \simulationParameters{mutationrate=$10^{-10}$, link=ps300xg200xmr1-10-10}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -567,7 +574,7 @@
                 -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
           \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-10}
     \end{figure}
     
@@ -575,7 +582,7 @@
     \subsection{Parents number variation}
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Parent number}
+    \simulationParameters{parents=300, link=ps300xg200xmr1-10-4xprt300}
     \begin{figure}[H] 
     \centering
         \begin{tikzpicture}
@@ -617,7 +624,7 @@
                 32 +- 346 & -63 +- 25 & 51 +- 505 & -48 +- 1748 & 145 +- 228 
            \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-4xprt300}
     \end{figure}
     
@@ -627,7 +634,7 @@
     \subsection{Initial phenotype variation}
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Initial Phenotype}
+    \simulationParameters{initialpheno=-11-11-1, link=ps300xg200xmr1-10-4xalt1}
     \begin{figure}[H] 
     \centering
         \begin{tikzpicture}
@@ -669,14 +676,14 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-4xalt1}
     \end{figure}
     
     
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Initial Phenotype}
+    \simulationParameters{initialpheno=1-11-11, link=ps300xg200xmr1-10-4xalt2}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -718,7 +725,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps300xg200xmr1-10-4xalt2}
     \end{figure}
     
@@ -726,7 +733,7 @@
     \subsection{Population size variation}
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Population size}
+    \simulationParameters{popsize=20, link=ps20xg200xmr1-10-4}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -768,7 +775,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps20xg200xmr1-10-4}
     \end{figure}
     
@@ -777,7 +784,7 @@
     \subsection{population size and parent count variation  (consanguinity in little population)}
     \paragraph*{}
     Parameters for the next experience :\\
-    \simulationParameters{Population size, Parent number}
+    \simulationParameters{popsize=20, parents=20, link=ps20xg200xprt20xmr1-10-4}
     \begin{figure}[H] 
     \centering
     \begin{tikzpicture}
@@ -819,7 +826,7 @@
                 72 +- 0 & 27 +- 0 & 156 +- 0 & -65 +- 0 & 162 +- 0 
            \end{pmatrix}
     $
-            \caption{\footnotesize To look \& regenerate}
+            \caption{\footnotesize TODO: Caption needed}
             \label{mat:ps20xg200xprt20xmr1-10-4}
     \end{figure}
 
