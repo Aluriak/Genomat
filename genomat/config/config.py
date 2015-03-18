@@ -171,6 +171,7 @@ def prettify(configuration, prefix=''):
         prefix+'mutation wideness:\t': configuration[WIDENESS_MUT],
         prefix+'perform stats    :\t': ('yes ['+configuration[STATS_FILE]+']') if configuration[DO_STATS] else 'no',
         prefix+'perform profiles :\t': ('yes ['+configuration[PROFILES_FILE]+']') if configuration[SAVE_PROFILES] else 'no',
+        prefix+'seed             :\t': configuration[SEED_VALUE] if configuration[SEED_VALUE] is not None else 'random',
     }
     return (
         '\n'.join((k + str(v) for k, v in to_print.items()))
