@@ -3,8 +3,8 @@ POP_DEFAULT=--generations=200 --pop_size=300
 STATS=--erase_previous_stats --do_stats --save_profiles
 PHENO_ALT1=--initial_phenotype=-1,1,-1,1,-1
 PHENO_ALT2=--initial_phenotype=1,-1,1,-1,1
-SEED=--seed=4223 
-
+SEED=--seed=4223
+SEED_ALT=--seed=587603
 	
 test_computation:
 	python3 -m genomat --generations=10 --pop_size=10 --mutation_rate=0.00001 --profiles_file="data/test_p.csv" --stats_file="data/test.csv" $(OPTIONS) --erase_previous_stats --do_stats --save_profiles --save_networks
@@ -14,8 +14,9 @@ test_computation:
 ###############################################################################
 #parameters given by needed for the report
 computation1:
-	# telltale
-	python3 -m genomat $(SEED) $(POP_DEFAULT) --mutation_rate=0.0001	--profiles_file="doc/ps300xg200xmr1-10-4xprfl.csv" --stats_file="doc/ps300xg200xmr1-10-4.csv" $(OPTIONS) $(STATS)
+	# telltale and telltale with other seed
+	python3 -m genomat $(SEED)     $(POP_DEFAULT) --mutation_rate=0.0001	--profiles_file="doc/ps300xg200xmr1-10-4xprfl.csv"	    --stats_file="doc/ps300xg200xmr1-10-4.csv" $(OPTIONS) $(STATS)
+	python3 -m genomat $(SEED_ALT) $(POP_DEFAULT) --mutation_rate=0.0001	--profiles_file="doc/ps300xg200xmr1-10-4xsd587603xprfl.csv" --stats_file="doc/ps300xg200xmr1-10-4xsd587603.csv" $(OPTIONS) $(STATS)
 	# mutation rate variation
 	python3 -m genomat $(SEED) $(POP_DEFAULT) --mutation_rate=1		--profiles_file="doc/ps300xg200xmr1-10-0xprfl.csv" --stats_file="doc/ps300xg200xmr1-10-0.csv" $(OPTIONS) $(STATS)
 	python3 -m genomat $(SEED) $(POP_DEFAULT) --mutation_rate=0.1		--profiles_file="doc/ps300xg200xmr1-10-1xprfl.csv" --stats_file="doc/ps300xg200xmr1-10-1.csv" $(OPTIONS) $(STATS)
