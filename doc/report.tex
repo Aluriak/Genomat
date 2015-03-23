@@ -147,31 +147,24 @@ Ostiane	\textsc{D'Augustin}
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
 \emph{Supervisors:} \\
-Yann \textsc{Le Cunff}\\
 Olivier \textsc{Dameron}
+Yann \textsc{Le Cunff}\\
 \end{flushright}
 \end{minipage}\\[2cm]
 
-%----------------------------------------------------------------------------------------
 %	DATE SECTION
-%----------------------------------------------------------------------------------------
-
 {\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
 
-%----------------------------------------------------------------------------------------
-%	LOGO SECTION
-%----------------------------------------------------------------------------------------
-
-\includegraphics{rennes1_logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	Link for Github
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\paragraph*{}
 Source code available in \textsc{Public Domain} on github repository :\\ \url{https://github.com/Aluriak/Genomat}
 
+%	LOGO SECTION
+\vspace{1cm}
+\includegraphics[width=0.6\textwidth]{rennes1_logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
 \end{titlepage}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
@@ -278,6 +271,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{Telltale}
     \paragraph*{}
     The used telltale follows the next rules :\\
@@ -309,11 +303,16 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
       \label{fig:telltale}
     \end{figure}
     \paragraph*{}
-    We chose to use the mutation rate of $10^{-4}$ as the default parameter because it is a medium value, which can be a "natural" mutation rate, to which it will be easy to compare the other data.
+    The mutation rate of $10^{-4}$ is used as the default parameter because its a medium value, which can be a "natural" mutation rate, to which it will be easy to compare the other data.
     \paragraph*{}
-    First we can notice that genes have rather the same conduct : their resistance to KO survivability ratio first increase and then stabilize about more or less 1. But, we can distinguish two different conducts in that global trend. In one hand, genes 1, 3, 4 and even later gene 2 reach a resistance to KO survivability ratio equals to 1. It means that those genes, even once KO, do not avoid the individual's survival. In the other hand, the gene 0 never reaches resistance to KO survivability ratio of 1. It approaches the 150th and the 160th generations, but does not reaches it for all that. It means that this gene 0 is more essential for the individual's survival.
+    First, genes seems to have rather the same conduct : their resistance to KO survivability ratio first increase and then stabilize about more or less 1. 
+    But there are two different conducts in that global trend. In one hand, genes 1, 3, 4 and even later gene 2 reach a resistance to KO survivability ratio equals to 1. 
+    It means that those genes, even once KO, do not avoid the individual's survival. In the other hand, the gene 0 never reaches resistance to KO survivability ratio of 1. 
+    It approaches the 150th and the 160th generations, but does not reaches it for all that. It means that this gene 0 is more essential for the individual's survival.
     \paragraph*{}
-    As a result, we can notice that the diversity is slowly decreasing during the 50 first generations. Then, it decreases rather fastly from 1 to 0.4 up to the 150th generation, where it finaly stabilizes around 0.35. Indeed, as there is only one gene to be essential, and as the mutation rate is pretty low, the global population phenotype is stabilizing, which lowers the diversity.
+    As a result, the diversity is slowly decreasing during the 50 first generations. 
+    Then, it decreases rather fastly from 1 to 0.4 up to the 150th generation, where it finaly stabilizes around 0.35. 
+    Indeed, as there is only one gene to be essential, and as the mutation rate is pretty low, the global population phenotype is stabilizing, which lowers the diversity.
 
     \begin{figure}[H] 
             \centering
@@ -331,12 +330,14 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
             \label{mat:telltale}
     \end{figure}
     \paragraph*{}
-    A big value indicates a big gene influence on the other, and a small value, a small influence. If it is a positive value, we have an up-regulation, and, if it is a negative value, we have a down-regulation.
+    A big value indicates a big gene influence on the other, and a small value, a small influence. If it is a positive value, the gene is a promoter, and, if it is a negative value, its a down-regulator.
+    A $m +- v$ notation show that the gene affect the other, in all the population, with an average value of m and a variance of v.
+    First consequence of that observation : variance of 0 shows an identical gene regulation value in all the population.
     \paragraph*{}
-    All the positions are not interesting, but we will take some examples :
+    All the positions are not interesting, but some can be easily commented :
     \begin{itemize}
-        \item The last data of the first line (4 +- 1428) seems that the gene 4 does not up-regulate very much the gene 0 (influence = 4), but there is a variability of 1426, that we must consider, and that means that in some occasions, the gene 0 actually has big influence on the gene 4.
-        \item The first data of the third line (-4 +- 0) means that the gene 0 does not down-regulate very much the gene 2 (influence = -4), and the variability is 0, then, it is the same for all the individuals.
+            \item The last data of the first line (4 +- 1428) seems that the gene 4 have both a role of promotor and regulator for the gene 4 (average near to 0, high variance).
+        \item The first data of the third line (-4 +- 0) means that the gene 2 performs a small down-regulation on the gene 2 (influence = -4), and, because of the variability of 0, its a universal behavior.
     \end{itemize}
     \paragraph*{}
     In all simulations, many genes will present an important variation of genes regulation, but some of them will be conserved by all genes networks.
@@ -347,6 +348,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{Telltale with another seed}
     \paragraph*{}
     Just for verify that choice of seed is not critical for results, a run of the telltale with a different seed is performed : \\
@@ -407,6 +409,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newpage
 \subsection{Mutation rate variation}
     \paragraph*{}
     Parameters for the first experience :\\
@@ -693,6 +696,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newpage
 \subsection{Parents number variation}
     \paragraph*{}
     Parameters for the next experience :\\
@@ -757,6 +761,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newpage
 \subsection{Initial phenotype variation}
     \paragraph*{}
     Parameters for the next experience :\\
@@ -862,6 +867,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newpage
 \subsection{Population size variation}
     \paragraph*{}
     Parameters for the next experience :\\
@@ -921,6 +927,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newpage
 \subsection{Consanguinity in a small population}
     \paragraph*{}
     Parameters for the next experience :\\
