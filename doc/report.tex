@@ -169,7 +169,7 @@ Olivier \textsc{Dameron}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \paragraph*{}
-Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Genomat}
+Source code available in \textsc{Public Domain} on github repository :\\ \url{https://github.com/Aluriak/Genomat}
 
 \end{titlepage}
 
@@ -181,12 +181,11 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
 	The aim of this project is to implement a genetic algorithm which will bring out the connexions between different genes, 
         their regulation networks, and some properties linked to, as well as their resistance to genes knock-out (KO).
 	\paragraph*{}
-	We will study a famous genes network example, which has been highlighted by Wagner. Wagner's genes network is an artificial genes network calculation model. 
+        This project will study a famous genes network example, which has been highlighted by \textit{Wagner}. Wagner's genes network is an artificial genes network calculation model. 
         It has explained all the development and evolution process of genetic regulation networks. It has been first developed by Andreas Wagner in 1996, 
         and then used by several research teams in order to study genes network evolution, genes expression, etc.
 	\paragraph*{}
-	We will simulate \textit{in silico} a population's evolution over many generations. Each individual is caracterized by his genotype 
-        (that is to say, its genes network). 
+        Main subject is an \textit{in silico} implementation of the Wagner's genes network, and observation of population's evolution over many generations, where an individual is a  genes network, also called \textit{genotype}. 
         Individuals will be submit to an evolutive process by the intermediary of their genes networks.
 
 
@@ -198,7 +197,8 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
 \section*{Project organization}
 	\paragraph*{}
         The project follows a Python-like packaging, with the main program launchable as a package. (\textit{python -m genomat})
-        Many parameters can be sended through command-line arguments, or configuration file.
+        Many parameters can be sended through command-line arguments, or configuration file. Some of them are used for comparison and to study Wagner's model.
+        \textit{python -m genomat --help} show all applicable options.\\
         Outputs are mainly in \textsc{csv format} (notabily those provided for statistics).
 
 	\paragraph*{}
@@ -243,6 +243,14 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 \label{fig:umldiag}
         \end{figure}
 
+	\paragraph*{}
+        Architecture is designed with the help of some patterns. 
+        Notabily, Observer Pattern provides a total and powerful flexibility about what is watched in simulations.
+        An easy solution for extends statistics study and do interesting things like phylogenetic trees is create an Observer dedicated to that task.
+        The current observers are basics, but necessary for a first approach.
+
+        \paragraph*{}
+        The Genomat source code is placed in the public domain. Feel free to use it for improve implementations, add observers and crunsch your own data ! 
 
 
 
@@ -254,10 +262,10 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
     Main data generated results of gene KO, for each gene at each generation. 
     A diversity ratio is also computed at each generation.
     \paragraph*{}
-     First, as there was no mutation rate given, exploited simulations use a mutation rate from $10^{-0}$ to $10^{-6}$, 
+     First, as there was no mutation rate given, exploited simulations use a mutation rate from $10^{-0}$ to $10^{-10}$, 
      with a constant population size of 300 individuals and 200 generations.\\
      For each gene, the survavibility ratio is computed. \\
-     The survivability ratio is defined as $S_{g} = \frac{KO_g}{population_{size}}$ 
+     The survivability ratio is defined as $S_g = \frac{KO_g}{population_{size}}$ 
      with $KO_g$ as the number of individuals still viable after the KO of gene g.
 
 
@@ -319,9 +327,21 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 9 
             \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the telltale last generation.}
             \label{mat:telltale}
     \end{figure}
+    \paragraph*{}
+    A big value indicates a big gene influence on the other, and a small value, a small influence. If it is a positive value, we have an up-regulation, and, if it is a negative value, we have a down-regulation.
+    \paragraph*{}
+    All the positions are not interesting, but we will take some examples :
+    \begin{itemize}
+        \item The last data of the first line (4 +- 1428) seems that the gene 4 does not up-regulate very much the gene 0 (influence = 4), but there is a variability of 1426, that we must consider, and that means that in some occasions, the gene 0 actually has big influence on the gene 4.
+        \item The first data of the third line (-4 +- 0) means that the gene 0 does not down-regulate very much the gene 2 (influence = -4), and the variability is 0, then, it is the same for all the individuals.
+    \end{itemize}
+    \paragraph*{}
+    In all simulations, many genes will present an important variation of genes regulation, but some of them will be conserved by all genes networks.
+    
+
     
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -375,28 +395,21 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -28 +- 4677 & 93 +- 1528 & -39 +- 3049 & -31 +- 1197 & 229 +- 1967 
             \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. First gene is almost totally conserved in all individuals of the population.}
             \label{mat:telltaleAlt}
-    A big value indicates a big gene influence on the other, and a small value, a small influence. If it is a positive value, we have an up-regulation, and, if it is a negative value, we have a down-regulation.
-    \paragraph*{}
-    All the positions are not interesting, but we will take some examples :
-    \begin{itemize}
-        \item The last data of the first line (4 +- 1428) seems that the gene 4 does not up-regulate very much the gene 0 (influence = 4), but there is a variability of 1426, that we must consider, and that means that in some occasions, the gene 0 actually has big influence on the gene 4.
-        \item The first data of the third line (-4 +- 0) means that the gene 0 does not down-regulate very much the gene 2 (influence = -4), and the variability is 0, then, it is the same for all the individuals.
-    \end{itemize}
     \end{figure}
+    \paragraph*{}
+    Interesting case : the first gene is almost totally conserved by all individuals. Others genes have very variable regulations values.
+    Last genes show average values near from 0.
     
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mutation rate variation}
-    
-    
-    \subsection{Mutation rate variation}
     \paragraph*{}
-    
-    \paragraph*{}
-    Parameters for the next experience :\\
+    Parameters for the first experience :\\
     \simulationParameters{mutationrate=$10^{-0}$, link=ps300xg200xmr1-10-0}
     \begin{figure}[H] 
       \centering
@@ -425,9 +438,12 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps300xg200xmr1-10-0}
     \end{figure}
     \paragraph*{}
-    A mutation rate of 1 means that each gene of each individual of each generation will mutate. It is a theorical case, wich can not happen in a natural population.
+    A mutation rate of 1 means that each gene of each individual of each generation will mutate. Its a limit case that show a constantly different population.
     \paragraph*{}
-    As each gene mutates, there is no resistance to gene KO survivability ratio stabilization, as we could see for the telltale. Each gene is more or less essential. We do not notice a stabilization to a resistance to gene KO survivability of 1, however, all the lines are beyond 0.9, which is very good. As each gene mutates, the diversity is very high (a constant equals to 1), and even if a gene is KO, the diversity given by the mutations allow the individual to be viable.
+    As each gene mutates, there is no constant resistance to gene KO survivability ratio stabilization, as we could see for the telltale. 
+    Each gene is more or less essential. We do not notice a stabilization to a resistance to gene KO survivability of 1, 
+    however, all the lines are beyond 0.9, and never decrease to a lower value. 
+    As each gene mutates, the diversity is very high (constantly equals to 1).
 
     \begin{figure}[H] 
             \centering
@@ -441,13 +457,16 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 15 +- 25929 & 58 +- 25518 & 2 +- 10437 & -80 +- 5527 & 241 +- 9406 
             \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-0}
     \end{figure}
     \paragraph*{}
-    We can notice that the medium influences vary widely (2 to 326 in absolute values) from a gene to an other, but we can also notice that the variability around those values are very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
+    Averaged regulation values stay near 0 (2 to 326 in absolute values), but variances are very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. 
+    In other words, each genotype is different, and no genes have a universal influence on another (promotor or regulator).\\
+    It shows the range of possibilities for assure genomes viability.
     
     
+    \newpage
     \paragraph*{}
     Parameters for the next experience :\\
     \simulationParameters{mutationrate=$10^{-1}$, link=ps300xg200xmr1-10-1}
@@ -502,6 +521,7 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
      We can notice that the medium influences less vary than on the previous case (2 to 152 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
     
     
+    \newpage
     \paragraph*{}
     Parameters for the next experience :\\
     \simulationParameters{mutationrate=$10^{-2}$, link=ps300xg200xmr1-10-2}
@@ -532,8 +552,8 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps300xg200xmr1-10-2}
     \end{figure}
     \paragraph*{}
-    A mutation rate of $10^{-2}$ is still a pretty high mutation rate, and the conduct is very similar to the previous graph one's. However, we can notice few variation in the diversity, due to the fact that there small stabilizations on the global phenotype.
-   
+    A mutation rate of $10^{-2}$ is still a pretty high mutation rate, and the conduct is very similar to the previous graph one's. 
+    However, a few variation in the diversity appears, due to the fact that there small stabilizations on the global phenotype.
 
     \begin{figure}[H] 
             \centering
@@ -547,13 +567,16 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -164 +- 10949 & -82 +- 2716 & 106 +- 1495 & -84 +- 12073 & 162 +- 5029  
             \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-2}
     \end{figure}    
     \paragraph*{}
-    We can notice that the medium influences vary a bit than on the previous case (10 to 298 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is almost 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
+    The averaged influence vary a bit more than the previous experience (10 to 298 in absolute values) from a gene to an other, but the variability around those values are still very high. 
+    There is a possible correlation this fact to the diversity which is almost 1 at the end of the 200 generations. 
+    There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
 
       
+    \newpage
     \paragraph*{}
     Parameters for the next experience :\\
     \simulationParameters{mutationrate=$10^{-5}$, link=ps300xg200xmr1-10-5}
@@ -584,31 +607,31 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps300xg200xmr1-10-5}
     \end{figure}
     \paragraph*{}
-    A mutation rate of $10^{-5}$ is a usual mutation rate in a natural population. This result is thus very insteresting because it really reflects the global conducts of a natural population (as far as we can consider as natural a population composed of only five genes).
+    A mutation rate of $10^{-5}$ is a usual mutation rate in a natural population. This result is thus very insteresting because it really reflects the global conducts of a natural population 
+    (as far as we can consider as natural a population composed of only five genes).
     \paragraph*{}
-    With this mutation rate, we can notice that the five genes have a very similar conduct. Their resistance to gene KO survivability ratio increase over the 50 first generation, and then, due to the weak mutation rate, stabilize at 1, when, they become unessential.
+    With this mutation rate, the five genes have a very similar conduct. Their resistance to KO increase over the 50 first generation, and then, due to the weak mutation rate, stabilized at 1 without decreasing.
     \paragraph*{} 
-    As a result of the genes conduct, the diversity first decreases very slowly during the 50 first generations, and then decreases very fastly from near to 1 to 0.35. 
-   
+    As a result of the genes conduct, the diversity first decreases very slowly during the 50 first generations, and then fall fastly to 0.35. 
 
     \begin{figure}[H] 
             \centering
             \small
     $
             \begin{pmatrix}
-                  193 +- 211 & 43 +- 1393 & 24 +- 80 & -80 +- 570 & 7 +- 362 \\
-                  92 +- 1732 & 155 +- 75 & 106 +- 7319 & 105 +- 8293 & -15 +- 1104 \\
-                  24 +- 3515 & 17 +- 3064 & 107 +- 9182 & 14 +- 1100 & -17 +- 1364 \\
-                  -100 +- 1215 & 185 +- 7793 & 84 +- 415 & 164 +- 582 & -91 +- 191 \\
-                  29 +- 2611 & 92 +- 1664 & 2 +- 2128 & 39 +- 5680 & 151 +- 499 
+                  193 +- 211    & 43 +- 1393    & 24 +- 80      & -80 +- 570    & 7 +- 362 \\
+                  92 +- 1732    & 155 +- 75     & 106 +- 7319   & 105 +- 8293   & -15 +- 1104 \\
+                  24 +- 3515    & 17 +- 3064    & 107 +- 9182   & 14 +- 1100    & -17 +- 1364 \\
+                  -100 +- 1215  & 185 +- 7793   & 84 +- 415     & 164 +- 582    & -91 +- 191 \\
+                  29 +- 2611    & 92 +- 1664    & 2 +- 2128     & 39 +- 5680    & 151 +- 499 
             \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-5}
     \end{figure}
     \paragraph*{}
-    We can notice that the medium influences still vary than on the previous case (2 to 93 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
-    
+    All average genes values are near 0, with an high variance that allow all gene to promotes or regulates others. 
+    The first gene show a little less variable regulation value.
 
 
     \paragraph*{}
@@ -641,8 +664,12 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps300xg200xmr1-10-10}
     \end{figure}
     \paragraph*{}
-    For a  mutation rate of $10^{-10}$, we can observe exactly the same profile as the previous graph, for the experimentation with a mutation rate of $10^{-5}$. Those results suppose that for a given population size and a given genes network, we will always obtain the same results using mutation rates low enough.
-   
+    A mutation rate of $10^{-10}$ lead to the same profile as the previous graph, for the experimentation with a mutation rate of $10^{-5}$. Those results suppose that 
+    for a given population size and a given genes network, we will always obtain the same results using mutation rates low enough.
+    \paragraph*{}
+    A low mutation rate provides a very stable population for mutation propagation. 
+    A beneficial mutation will have more time for be propagated in the population than in the previous simulations. Moreover, it will be mainly propagated "as is", 
+    without other mutations. In a context of higher mutation rate, a mutation, before be propagated to all population, will be modified or complemented by another mutation.
 
     \begin{figure}[H] 
             \centering
@@ -656,11 +683,11 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
           \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-10}
     \end{figure}
     \paragraph*{}
-    We can notice that the gene 1 as a very precise influence on each other gene, with a variability around the pass mark of  0. That means that there is only one possible phenotype for this gene and its interactions with the other genes.
+    The gene 1 as a very conserved influence on other genes, with a variability of 0. That means that there is only one possible genotype for this gene and its interactions with the other genes.
     
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -697,9 +724,11 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps300xg200xmr1-10-4xprt300}
     \end{figure}
     \paragraph*{}
-    When the parents number is equals to the population size, we actually consider that the population is composed of one big pool of genes instead of a lot of smaller ones. Then, when we create a new individual, each of its genes is randomly chosen between all the population's genes (and not only between just two parents' ones).
+    When the parents number is equals to the population size, we actually consider that the population is composed of one big pool of genes instead of a lot of smaller ones. 
+    Then, when we create a new individual, each of its genes is randomly chosen in all the population's genes (and not only between just two parents' ones).
     \paragraph*{}
-    In this case, we can notice that one gene (gene 0) becomes  with a resistance to gene KO survivability ratio which never reaches 1, and even drops from almost 1 to 0.85 around the 150th generation; whereas the four other genes are not essential since the 25th generation.
+    In this case, we can notice that one gene (gene 0) developed a resistance to gene KO survivability ratio which never reaches 1 and tends to slowly decrease, 
+    and finally drops from almost 1 to 0.85 around the 150th generation ; whereas the four other genes are not essential since the 25th generation.
     \paragraph*{}
     As a result, the diversity is still decreasing from the 25th generation as the survivability ratio is only based on one single gene.
 
@@ -715,9 +744,12 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 32 +- 346 & -63 +- 25 & 51 +- 505 & -48 +- 1748 & 145 +- 228 
            \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-4xprt300}
     \end{figure}
+    \paragraph*{}
+    As shown by graph~\ref{fig:ps300xg200xmr1-10-4xprt300}, the first gene is important, and seems to never be able to reach the 1 level.
+    The others, with few exeptions (last of gene 2, second of last gene), shows a high variability despite a low population diversity.
     
     
     
@@ -770,7 +802,7 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-4xalt1}
     \end{figure}
     
@@ -804,10 +836,6 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals, a mutation rate of $10^{-4}$, and an alternative initial phenotype (1,-1,1,-1,1)}
       \label{fig:ps300xg200xmr1-10-4xalt2}
     \end{figure}
-    \paragraph*{}
-    The two graphs concerning the alternative phenotypes have exactly the same global conduct as the telltale. As the only changed parameter is the initial phenotype, we can suppose that the initial phenotype does not have any influence on the global conduct of the population's genes network over several generations.
-   
-
     \begin{figure}[H] 
             \centering
             \small
@@ -820,9 +848,15 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-4xalt2}
     \end{figure}
+    \paragraph*{}
+    The two graphs concerning the alternative phenotypes have exactly the same global conduct as the telltale. 
+    As the only changed parameter is the initial phenotype, a objective supposition is that the initial phenotype does not have any influence 
+    on the global conduct of the population's genes network over several generations.
+   
+
     
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -859,7 +893,9 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps20xg200xmr1-10-4}
     \end{figure}
     \paragraph*{}
-    On a very small population (only 20 individuals), we can notice that four genes on five become very quickly (about the 25th generation) unessential and stabilize at a resistance to gene KO survivability of 1, whereas, at the same time, the gene 3 becomes absolutly essential with a resistance to gene KO survivability which drops during about 5 generation from 0.8 to 0. 
+    On a very small population (only 20 individuals), we can notice that four genes on five become very quickly (about the 25th generation) unessential and stabilize 
+    at a resistance to gene KO survivability of 1, whereas, at the same time, the gene 3 becomes absolutly essential 
+    with a resistance to gene KO survivability which drops during about 5 generation from 0.8 to 0. 
     \paragraph*{}
     As a result, the diversity drops very fastly from 1 to 0.2 around the 25th generation, and then decreases more slowly to 0 around the 50th generation.
    
@@ -876,7 +912,7 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps20xg200xmr1-10-4}
     \end{figure}
     
@@ -885,7 +921,7 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{population size and parent count variation  (consanguinity in little population)}
+\subsection{Consanguinity in a small population}
     \paragraph*{}
     Parameters for the next experience :\\
     \simulationParameters{popsize=20, parents=20, link=ps20xg200xprt20xmr1-10-4}
@@ -916,9 +952,11 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \label{fig:ps20xg200xprt20xmr1-10-4}
     \end{figure}
     \paragraph*{}
-    This case (a very small population (20 individuals) and a parents number equals to the population size) corresponds to the most possible inbreeding. We then can notice that there is no essential gene. At first, gene 2 becomes essential with a big drop in its survivability ratio from 1 to 0.4 during the 25 first generations, but then, it increases back to 1 about the 40th generation.
-   \paragraph*{}
-   Contrary to the resistance to gene KO survivability ratios, the diversity decreases very quickly to 0.05; as the phenotypes number present in the population decreases too, and stabilizes.
+    This case (a very small population (20 individuals) and a parents number equals to the population size) corresponds to the most possible inbreeding. 
+    We then can notice that there is no essential gene. At first, gene 2 becomes essential with a big drop in its survivability ratio from 1 to 0.4 
+    during the 25 first generations, but then, it increases back to 1 about the 40th generation.
+    \paragraph*{}
+    Contrary to the resistance to gene KO survivability ratios, the diversity decreases very quickly to 0.05; as the phenotypes number present in the population decreases too, and stabilizes.
    
 
     \begin{figure}[H] 
@@ -937,42 +975,21 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
             \label{mat:ps20xg200xprt20xmr1-10-4}
     \end{figure}
     \paragraph*{}
-    We can notice that all the genes have a very precise influence on each other with a variability around the pass mark of 0. In that schema of full inbreeding, we show that only one single phenotype can allow survivability. There is not any more variation in the population, and no adaptability possibilities.
+    All the genes are conserved : variability is always equals to 0. 
+    In that schema of full inbreeding, we show that only one single genotype is conserved. The rare variations, if leading to improvements, will be kept and propagated to all the population.
+    It looks like the cloning way of reproduction : this population, if affected by something like a virus or a disaster, will certainly disappear.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%
-% APPENDICES            %
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newpage
-%\begin{appendix}
-%\section*{Annexes}
+\section{Conclusion}
+    \paragraph*{}
+    With a few watchables parameters, and without perform a complex selection of individuals, 
+    Wagner's genes networks shows an interesting model with many similarity with the biological world.
+    \paragraph*{}
+    Genomat provides an extensible and complete way to study that model, and this report show some example of data crunching.
+    With some lines of code, its possible to perform phylogenetic tree, genealogy, regulation statistics…
 
-%\begin{figure}[h] % place it THERE (add ! for exact placement)
-        %\centering
-        %\pgfplotstabletypeset[
-            %columns={time,wtf,error},
-            %col sep=comma,
-            %string type,
-            %every head row/.style={%
-                %before row={\hline
-                    %& \multicolumn{2}{c}{useless data} \\
-                    %},
-                %after row=\hline
-            %},
-            %every last row/.style={after row=\hline},
-            %columns/time/.style={column name=Time, column type=l},
-            %columns/error/.style={column name=Primary key, column type=r},
-            %columns/wtf/.style={column name=Concentration, column type=r},
-        %]{data.csv}
-        %\caption{Cool things that will be very useful for someone}
-        %\label{ftab:cool}
-%\end{figure}      
-
-
-
-%\end{appendix}
 \end{document}
 % END
