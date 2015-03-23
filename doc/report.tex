@@ -319,7 +319,7 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 9 
             \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:telltale}
     \end{figure}
     
@@ -357,6 +357,7 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
       \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 300 individuals and a mutation rate of $10^{-4}$, use as telltale}
       \label{fig:telltaleAlt}
     \end{figure}
+    This matrix is generated with of the last generation, and shows the medium influence of each genes on the others over the whole population and the variability around the pass mark. 
     \paragraph*{}
     As expected, two simulations that differs only by pseudo-random number generation will generate close results. 
     In fact, even with many runs of a simulation with a random seed, results always converge to a single solution, with some variations.
@@ -376,12 +377,22 @@ Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Gen
     $
             \caption{\footnotesize TODO: Caption needed}
             \label{mat:telltaleAlt}
+    A big value indicates a big gene influence on the other, and a small value, a small influence. If it is a positive value, we have an up-regulation, and, if it is a negative value, we have a down-regulation.
+    \paragraph*{}
+    All the positions are not interesting, but we will take some examples :
+    \begin{itemize}
+        \item The last data of the first line (4 +- 1428) seems that the gene 4 does not up-regulate very much the gene 0 (influence = 4), but there is a variability of 1426, that we must consider, and that means that in some occasions, the gene 0 actually has big influence on the gene 4.
+        \item The first data of the third line (-4 +- 0) means that the gene 0 does not down-regulate very much the gene 2 (influence = -4), and the variability is 0, then, it is the same for all the individuals.
+    \end{itemize}
     \end{figure}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mutation rate variation}
+    
+    
+    \subsection{Mutation rate variation}
     \paragraph*{}
     
     \paragraph*{}
