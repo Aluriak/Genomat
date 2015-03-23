@@ -1,5 +1,5 @@
 # Genomat
-Python3 and numpy project about matrix, genes network and (not exactly) genetic algoritm.  
+Python3 and numpy project about matrix, Wagner's genes network and (not exactly) genetic algorithm.  
 
 Use makefile for quick launch of modules.  
 *make tt* launch few unit tests.  
