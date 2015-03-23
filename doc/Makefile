@@ -1,6 +1,6 @@
 SOURCE=report
 
-all: source clean
+all: compile show clean
 
 clean:
 	- rm *.aux *.log 
@@ -8,8 +8,6 @@ clean:
 show:
 	evince $(SOURCE).pdf
 
-source:
+compile:
 	pdflatex $(SOURCE).tex && pdflatex $(SOURCE).tex
-	$(MAKE) show
-
 
