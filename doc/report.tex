@@ -243,7 +243,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
         The current observers are basics, but necessary for a first approach.
 
         \paragraph*{}
-        The Genomat source code is placed in the public domain. Feel free to use it for improve implementations, add observers and crunsch your own data ! 
+        The Genomat source code is placed in the public domain. Feel free to use it for improve implementations, add observers and crunsh your own data ! 
 
 
 
@@ -444,7 +444,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
     A mutation rate of 1 means that each gene of each individual of each generation will mutate. Its a limit case that show a constantly different population.
     \paragraph*{}
     As each gene mutates, there is no constant resistance to gene KO survivability ratio stabilization, as we could see for the telltale. 
-    Each gene is more or less essential. We do not notice a stabilization to a resistance to gene KO survivability of 1, 
+    Each gene is more or less essential. The Resistance to gene KO never stabilize to 1, 
     however, all the lines are beyond 0.9, and never decrease to a lower value. 
     As each gene mutates, the diversity is very high (constantly equals to 1).
 
@@ -464,7 +464,7 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
             \label{mat:ps300xg200xmr1-10-0}
     \end{figure}
     \paragraph*{}
-    Averaged regulation values stay near 0 (2 to 326 in absolute values), but variances are very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. 
+    Averaged regulation values stay near 0 (2 to 326 in absolute values), but variances are very high. There is probably a direct correlation to the diversity which is still 1 at the end of the 200 generations. 
     In other words, each genotype is different, and no genes have a universal influence on another (promotor or regulator).\\
     It shows the range of possibilities for assure genomes viability.
     
@@ -500,7 +500,11 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
       \label{fig:ps300xg200xmr1-10-1}
     \end{figure}
     \paragraph*{}
-    A mutation rate of $10^{-1}$ is still very high for a natural population, and the global conduct is similar to the previous graph one's. However, the resistance to gene KO survivability ratios are lower than the previous. As the mutation rate is lower, there is a bit more phenotype stabilization, and thus, a gene can easier become essential. For example, it is the case of the gene 0, which waits for the 60th generation to become unessential and stabilize around 1; contrary to gene 1 which is first unessential, and becomes more and more essential as the time spends.
+    A mutation rate of $10^{-1}$ is still very high for a natural population, and the global conduct is similar to the previous graph one's. 
+    However, the resistance to gene KO survivability ratios are lower than the previous. 
+    As the mutation rate is lower, there is a bit more phenotype stabilization, and thus, a gene can easier become essential. 
+    For example, it is the case of the gene 0, which waits for the 60th generation to become unessential and stabilize around 1; 
+    contrary to gene 1 which is first unessential, and becomes more and more essential as the time spends.
     \paragraph*{}
     Nevertheless, the diversity is still very high (constant equals to 1), which explains the pretty good resistance to gene KO survivability ratios.
    
@@ -517,11 +521,13 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
                 39 +- 3960 & 47 +- 4600 & 14 +- 5258 & 2 +- 1785 & 116 +- 1672 
             \end{pmatrix}
     $
-            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
+            \caption{\footnotesize Matrix generated with the data of the last generation}
             \label{mat:ps300xg200xmr1-10-1}
     \end{figure}
     \paragraph*{}
-     We can notice that the medium influences less vary than on the previous case (2 to 152 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
+    The averaged influences variation is smaller than the previous case (2 to 152 in absolute values) from a gene to an other, but the variability around those values are still very high. 
+    We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. 
+    There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
     
     
     \newpage
@@ -955,16 +961,15 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
               \legend{Gene 0, Gene 1, Gene 2, Gene 3, Gene 4, Diversity}
           \end{axis}
       \end{tikzpicture}
-      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of only 20 individuals and a mutation rate of $10^{-4}$}
+      \caption{\footnotesize Resistance to gene KO survivability ratio, over 200 generations, with a population of 20 individuals and a mutation rate of $10^{-4}$}
       \label{fig:ps20xg200xprt20xmr1-10-4}
     \end{figure}
     \paragraph*{}
     This case (a very small population (20 individuals) and a parents number equals to the population size) corresponds to the most possible inbreeding. 
-    We then can notice that there is no essential gene. At first, gene 2 becomes essential with a big drop in its survivability ratio from 1 to 0.4 
+    Quickly, essential genes disappear. At first, gene 2 becomes essential with a big drop in its survivability ratio from 1 to 0.4 
     during the 25 first generations, but then, it increases back to 1 about the 40th generation.
     \paragraph*{}
-    Contrary to the resistance to gene KO survivability ratios, the diversity decreases very quickly to 0.05; as the phenotypes number present in the population decreases too, and stabilizes.
-   
+    Contrary to the resistance to gene KO survivability ratios, the diversity decreases very quickly to 0.05 ; as population have 20 individuals, its the proof there is only one genotype.
 
     \begin{figure}[H] 
             \centering
@@ -990,13 +995,13 @@ Source code available in \textsc{Public Domain} on github repository :\\ \url{ht
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
+\section{Conclusion \& Perspectives}
     \paragraph*{}
     With a few watchables parameters, and without perform a complex selection of individuals, 
     Wagner's genes networks shows an interesting model with many similarity with the biological world.
     \paragraph*{}
-    Genomat provides an extensible and complete way to study that model, and this report show some example of data crunching.
-    With some lines of code, its possible to perform phylogenetic tree, genealogy, regulation statistics…
+    Genomat provides an extensible and complete way to study that model, and this report show some example of data crunshing.
+    With some lines of code, its possible to perform phylogenetic tree, genealogy, regulation statistics, multiple gene KO survivability,…
 
 \end{document}
 % END
