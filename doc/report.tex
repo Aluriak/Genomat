@@ -94,10 +94,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % PRÉAMBULE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Genomat\\PRJ Project Report}
-\author{Ostiane D'AUGUSTIN and Lucas BOURNEUF}
+%\title{Genomat\\PRJ Project Report}
+%\author{Ostiane D'AUGUSTIN and Lucas BOURNEUF}
 % laisser vide pour date de compilation
-\date{} 
+%\date{} 
 
 % FORMAT PAGES         
 \pagestyle{fancy} % nom du rendu (définit les lignes suivantes)
@@ -117,10 +117,61 @@
 % BEGIN                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-        \maketitle % page de titre
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center
+\textsc{\LARGE University of Rennes 1}\\[1.5cm]
+\textsc{\large Master 1}\\[0.5cm] 
+\textsc{\Large Bioinformatics and Genomics}\\[0.5cm] 
 
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
 
+\HRule \\[0.4cm]
+{ \huge \bfseries Genomat}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
 
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Authors:}\\
+Lucas \textsc{Bourneuf}\\
+Ostiane	\textsc{D'Augustin}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisors:} \\
+Yann \textsc{Le Cunff}\\
+Olivier \textsc{Dameron}
+\end{flushright}
+\end{minipage}\\[2cm]
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+\includegraphics{rennes1_logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Link for Github
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph*{}
+Repository on Github for the source code :\\ \url{https://github.com/Aluriak/Genomat}
+
+\end{titlepage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
@@ -365,7 +416,7 @@
     \paragraph*{}
     A mutation rate of 1 means that each gene of each individual of each generation will mutate. It is a theorical case, wich can not happen in a natural population.
     \paragraph*{}
-    As each gene mutates, there is no resistance to gene KO survivability ratio stabilization, as we could see for the telltale. Each gene is more or less essential. We do not notice a stabilization to a resistance to gene KO survivability of 1, however, all the lines are beyond 0.9, which is very good. As each gene mutates, the diversity is very high (a constant equals to 1), and even if a gene is KO, the diversity given by the mutations allow the invidual to be viable.
+    As each gene mutates, there is no resistance to gene KO survivability ratio stabilization, as we could see for the telltale. Each gene is more or less essential. We do not notice a stabilization to a resistance to gene KO survivability of 1, however, all the lines are beyond 0.9, which is very good. As each gene mutates, the diversity is very high (a constant equals to 1), and even if a gene is KO, the diversity given by the mutations allow the individual to be viable.
 
     \begin{figure}[H] 
             \centering
@@ -379,9 +430,11 @@
                 15 +- 25929 & 58 +- 25518 & 2 +- 10437 & -80 +- 5527 & 241 +- 9406 
             \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-0}
     \end{figure}
+    \paragraph*{}
+    We can notice that the medium influences vary widely (2 to 326 in absolute values) from a gene to an other, but we can also notice that the variability around those values are very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
     
     
     \paragraph*{}
@@ -431,9 +484,11 @@
                 39 +- 3960 & 47 +- 4600 & 14 +- 5258 & 2 +- 1785 & 116 +- 1672 
             \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-1}
     \end{figure}
+    \paragraph*{}
+     We can notice that the medium influences less vary than on the previous case (2 to 152 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
     
     
     \paragraph*{}
@@ -481,10 +536,12 @@
                 -164 +- 10949 & -82 +- 2716 & 106 +- 1495 & -84 +- 12073 & 162 +- 5029  
             \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-2}
     \end{figure}    
-    
+    \paragraph*{}
+    We can notice that the medium influences vary a bit than on the previous case (10 to 298 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is almost 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
+
       
     \paragraph*{}
     Parameters for the next experience :\\
@@ -518,7 +575,7 @@
     \paragraph*{}
     A mutation rate of $10^{-5}$ is a usual mutation rate in a natural population. This result is thus very insteresting because it really reflects the global conducts of a natural population (as far as we can consider as natural a population composed of only five genes).
     \paragraph*{}
-    With this mutation rate, we can notice that the five genes have a very similar conduct. Their resistance to gene KO survavibility ratio increase over the 50 first generation, and then, due to the weak mutation rate, stabilize at 1, when, they become unessential.
+    With this mutation rate, we can notice that the five genes have a very similar conduct. Their resistance to gene KO survivability ratio increase over the 50 first generation, and then, due to the weak mutation rate, stabilize at 1, when, they become unessential.
     \paragraph*{} 
     As a result of the genes conduct, the diversity first decreases very slowly during the 50 first generations, and then decreases very fastly from near to 1 to 0.35. 
    
@@ -535,10 +592,11 @@
                   29 +- 2611 & 92 +- 1664 & 2 +- 2128 & 39 +- 5680 & 151 +- 499 
             \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-5}
     \end{figure}
-
+    \paragraph*{}
+    We can notice that the medium influences still vary than on the previous case (2 to 93 in absolute values) from a gene to an other, but the variability around those values are still very high. We can correlate this fact to the diversity which is still 1 at the end of the 200 generations. There are a lot of different genotypes (genes networks) and then a lot of different phenotypes, with different genes influence from an individual to another.
     
 
 
@@ -572,7 +630,7 @@
       \label{fig:ps300xg200xmr1-10-10}
     \end{figure}
     \paragraph*{}
-    For a  mutation rate of $10^{-10}$, we can observ exactly the same profile as the previous graph, for the experimentation with a mutation rate of $10^{-5}$. Those results suppose that for a given population size and a given genes network, we will always obtain the same results using mutation rates low enough.
+    For a  mutation rate of $10^{-10}$, we can observe exactly the same profile as the previous graph, for the experimentation with a mutation rate of $10^{-5}$. Those results suppose that for a given population size and a given genes network, we will always obtain the same results using mutation rates low enough.
    
 
     \begin{figure}[H] 
@@ -587,9 +645,11 @@
                 -8 +- 1308 & -1 +- 2278 & 48 +- 456 & -71 +- 573 & 162 +- 101 
           \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-10}
     \end{figure}
+    \paragraph*{}
+    We can notice that the gene 1 as a very precise influence on each other gene, with a variability around the pass mark of  0. That means that there is only one possible phenotype for this gene and its interactions with the other genes.
     
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -626,7 +686,11 @@
       \label{fig:ps300xg200xmr1-10-4xprt300}
     \end{figure}
     \paragraph*{}
-   
+    When the parents number is equals to the population size, we actually consider that the population is composed of one big pool of genes instead of a lot of smaller ones. Then, when we create a new individual, each of its genes is randomly chosen between all the population's genes (and not only between just two parents' ones).
+    \paragraph*{}
+    In this case, we can notice that one gene (gene 0) becomes  with a resistance to gene KO survivability ratio which never reaches 1, and even drops from almost 1 to 0.85 around the 150th generation; whereas the four other genes are not essential since the 25th generation.
+    \paragraph*{}
+    As a result, the diversity is still decreasing from the 25th generation as the survivability ratio is only based on one single gene.
 
     \begin{figure}[H] 
             \centering
@@ -640,7 +704,7 @@
                 32 +- 346 & -63 +- 25 & 51 +- 505 & -48 +- 1748 & 145 +- 228 
            \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-4xprt300}
     \end{figure}
     
@@ -695,7 +759,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-4xalt1}
     \end{figure}
     
@@ -745,7 +809,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps300xg200xmr1-10-4xalt2}
     \end{figure}
     
@@ -801,7 +865,7 @@
                 -7 +- 6196 & -53 +- 13893 & 33 +- 1259 & 2 +- 692 & 91 +- 1449 
            \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps20xg200xmr1-10-4}
     \end{figure}
     
@@ -841,6 +905,9 @@
       \label{fig:ps20xg200xprt20xmr1-10-4}
     \end{figure}
     \paragraph*{}
+    This case (a very small population (20 individuals) and a parents number equals to the population size) corresponds to the most possible inbreeding. We then can notice that there is no essential gene. At first, gene 2 becomes essential with a big drop in its survivability ratio from 1 to 0.4 during the 25 first generations, but then, it increases back to 1 about the 40th generation.
+   \paragraph*{}
+   Contrary to the resistance to gene KO survivability ratios, the diversity decreases very quickly to 0.05; as the phenotypes number present in the population decreases too, and stabilizes.
    
 
     \begin{figure}[H] 
@@ -855,9 +922,12 @@
                 72 +- 0 & 27 +- 0 & 156 +- 0 & -65 +- 0 & 162 +- 0 
            \end{pmatrix}
     $
-            \caption{\footnotesize TODO: Caption needed}
+            \caption{\footnotesize Matrix generated with the data of the last generation. We can see the medium influence of each gene and its variability}
             \label{mat:ps20xg200xprt20xmr1-10-4}
     \end{figure}
+    \paragraph*{}
+    We can notice that all the genes have a very precise influence on each other with a variability around the pass mark of 0. In that schema of full inbreeding, we show that only one single phenotype can allow survivability. There is not any more variation in the population, and no adaptability possibilities.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION               %
